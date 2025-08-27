@@ -2,25 +2,32 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import ContactModal from './ContactModal';
-import { Menu, X, Code, Zap, Shield, ExternalLink } from 'lucide-react';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Menu, X, Code, Zap, Shield, ExternalLink, Globe } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { toast } = useToast();
+  const { t, language, setLanguage, isRTL } = useLanguage();
 
   const handleDashboardClick = () => {
     toast({
-      title: "لوحة التحكم قريباً!",
-      description: "نعمل على تطوير لوحة تحكم متقدمة لعملائنا",
+      title: t('dashboard') + " " + (language === 'ar' ? 'قريباً!' : 'Coming Soon!'),
+      description: language === 'ar' ? 'نعمل على تطوير لوحة تحكم متقدمة لعملائنا' : 'We are working on developing an advanced dashboard for our clients',
     });
   };
 
+  const toggleLanguage = () => {
+    setLanguage(language === 'ar' ? 'en' : 'ar');
+  };
+
   const navigation = [
-    { name: 'الرئيسية', href: '#home' },
-    { name: 'خدماتنا', href: '#services' },
-    { name: 'فريقنا', href: '#team' },
-    { name: 'مشاريعنا', href: '#projects' },
-    { name: 'تواصل معنا', href: '#contact' },
+    { name: t('home'), href: '#home' },
+    { name: t('services'), href: '#services' },
+    { name: t('team'), href: '#team' },
+    { name: t('projects'), href: '#projects' },
+    { name: t('contact'), href: '#contact' },
   ];
 
   return (
@@ -28,20 +35,20 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* الشعار */}
-          <div className="flex items-center space-x-4 rtl:space-x-reverse">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse">
+          <div className={`flex items-center space-x-4 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
+            <div className={`flex items-center space-x-2 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
               <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
                 <Code className="w-6 h-6 text-primary-foreground" />
               </div>
-              <div className="text-right rtl:text-left">
-                <div className="font-bold text-lg text-foreground">العزب تك</div>
-                <div className="text-sm text-muted-foreground">فريق تكنولوجيا المعلومات</div>
+              <div className={isRTL ? "text-right" : "text-left"}>
+                <div className="font-bold text-lg text-foreground">{t('companyName')}</div>
+                <div className="text-sm text-muted-foreground">{t('companySubtitle')}</div>
               </div>
             </div>
           </div>
 
           {/* القائمة - سطح المكتب */}
-          <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+          <nav className={`hidden md:flex items-center space-x-8 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
             {navigation.map((item) => (
               <a
                 key={item.name}
@@ -54,20 +61,23 @@ const Header = () => {
           </nav>
 
           {/* أزرار الإجراءات */}
-          <div className="hidden md:flex items-center space-x-4 rtl:space-x-reverse">
+          <div className={`hidden md:flex items-center space-x-4 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
+            {/* زر تغيير اللغة */}
+            <LanguageToggle />
+            
             <Button variant="outline" size="sm" onClick={handleDashboardClick}>
-              <Shield className="w-4 h-4 ml-2" />
-              لوحة التحكم
+              <Shield className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+              {t('dashboard')}
             </Button>
             <ContactModal 
               trigger={
                 <Button size="sm" className="bg-gradient-tech hover:opacity-90">
-                  <Zap className="w-4 h-4 ml-2" />
-                  ابدأ مشروعك
+                  <Zap className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                  {t('startProject')}
                 </Button>
               }
-              title="ابدأ مشروعك التقني"
-              description="احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول"
+              title={t('startProject')}
+              description={language === 'ar' ? 'احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول' : 'Book a free consultation to discuss your project and determine the best solutions'}
             />
           </div>
 
@@ -97,19 +107,22 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4 border-t border-border">
+                {/* زر تغيير اللغة للجوال */}
+                <LanguageToggle variant="outline" size="sm" />
+                
                 <Button variant="outline" size="sm" onClick={handleDashboardClick}>
-                  <Shield className="w-4 h-4 ml-2" />
-                  لوحة التحكم
+                  <Shield className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                  {t('dashboard')}
                 </Button>
                 <ContactModal 
                   trigger={
                     <Button size="sm" className="bg-gradient-tech hover:opacity-90 w-full">
-                      <Zap className="w-4 h-4 ml-2" />
-                      ابدأ مشروعك
+                      <Zap className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                      {t('startProject')}
                     </Button>
                   }
-                  title="ابدأ مشروعك التقني"
-                  description="احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول"
+                  title={t('startProject')}
+                  description={language === 'ar' ? 'احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول' : 'Book a free consultation to discuss your project and determine the best solutions'}
                 />
               </div>
             </nav>

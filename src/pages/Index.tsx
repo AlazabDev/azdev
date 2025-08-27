@@ -5,6 +5,7 @@ import TeamSection from '@/components/TeamSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import LanguageDemo from '@/components/LanguageDemo';
 import { useEffect } from 'react';
 import { defaultSEO, updatePageTitle, updateMetaDescription, addStructuredData, organizationStructuredData } from '@/lib/seo';
 
@@ -55,6 +56,7 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
+        <LanguageDemo />
         <ServicesSection />
         <TeamSection />
         <ProjectsSection />
