@@ -1,9 +1,19 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Code, Zap, Shield } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
+import ContactModal from './ContactModal';
+import { Menu, X, Code, Zap, Shield, ExternalLink } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleDashboardClick = () => {
+    toast({
+      title: "لوحة التحكم قريباً!",
+      description: "نعمل على تطوير لوحة تحكم متقدمة لعملائنا",
+    });
+  };
 
   const navigation = [
     { name: 'الرئيسية', href: '#home' },
@@ -45,14 +55,20 @@ const Header = () => {
 
           {/* أزرار الإجراءات */}
           <div className="hidden md:flex items-center space-x-4 rtl:space-x-reverse">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={handleDashboardClick}>
               <Shield className="w-4 h-4 ml-2" />
               لوحة التحكم
             </Button>
-            <Button size="sm" className="bg-gradient-tech hover:opacity-90">
-              <Zap className="w-4 h-4 ml-2" />
-              ابدأ مشروعك
-            </Button>
+            <ContactModal 
+              trigger={
+                <Button size="sm" className="bg-gradient-tech hover:opacity-90">
+                  <Zap className="w-4 h-4 ml-2" />
+                  ابدأ مشروعك
+                </Button>
+              }
+              title="ابدأ مشروعك التقني"
+              description="احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول"
+            />
           </div>
 
           {/* زر القائمة للجوال */}
@@ -81,14 +97,20 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4 border-t border-border">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={handleDashboardClick}>
                   <Shield className="w-4 h-4 ml-2" />
                   لوحة التحكم
                 </Button>
-                <Button size="sm" className="bg-gradient-tech hover:opacity-90">
-                  <Zap className="w-4 h-4 ml-2" />
-                  ابدأ مشروعك
-                </Button>
+                <ContactModal 
+                  trigger={
+                    <Button size="sm" className="bg-gradient-tech hover:opacity-90 w-full">
+                      <Zap className="w-4 h-4 ml-2" />
+                      ابدأ مشروعك
+                    </Button>
+                  }
+                  title="ابدأ مشروعك التقني"
+                  description="احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول"
+                />
               </div>
             </nav>
           </div>

@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
+import { useToast } from '@/components/ui/use-toast';
 import { 
   Code, 
   Mail, 
@@ -9,10 +12,57 @@ import {
   Twitter, 
   Github,
   ExternalLink,
-  Heart
+  Heart,
+  Loader2
 } from 'lucide-react';
 
 const Footer = () => {
+  const { toast } = useToast();
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      toast({
+        title: "خطأ",
+        description: "يرجى إدخال بريدك الإلكتروني",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubscribing(true);
+    
+    try {
+      // محاكاة إرسال البيانات
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      toast({
+        title: "تم الاشتراك بنجاح! 🎉",
+        description: "ستصلك آخر المستجدات التقنية على بريدك الإلكتروني",
+      });
+      
+      setEmail('');
+    } catch (error) {
+      toast({
+        title: "فشل في الاشتراك",
+        description: "حدث خطأ أثناء الاشتراك، يرجى المحاولة مرة أخرى",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
+
+  const handleSocialClick = (platform: string) => {
+    toast({
+      title: `${platform} قريباً!`,
+      description: "نعمل على إطلاق صفحاتنا على وسائل التواصل الاجتماعي",
+    });
+  };
+
   const services = [
     'تطوير التطبيقات',
     'إدارة قواعد البيانات',
@@ -132,16 +182,36 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold mb-3">تابعنا</h4>
               <div className="flex space-x-3 rtl:space-x-reverse">
-                <Button variant="ghost" size="sm" className="hover:bg-primary/10">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="hover:bg-primary/10"
+                  onClick={() => handleSocialClick('LinkedIn')}
+                >
                   <Linkedin className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm" className="hover:bg-primary/10">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="hover:bg-primary/10"
+                  onClick={() => handleSocialClick('GitHub')}
+                >
                   <Github className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm" className="hover:bg-primary/10">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="hover:bg-primary/10"
+                  onClick={() => handleSocialClick('Twitter')}
+                >
                   <Twitter className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm" className="hover:bg-primary/10">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="hover:bg-primary/10"
+                  onClick={() => handleSocialClick('البريد الإلكتروني')}
+                >
                   <Mail className="w-4 h-4" />
                 </Button>
               </div>
@@ -162,17 +232,33 @@ const Footer = () => {
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               احصل على آخر المستجدات التقنية والنصائح البرمجية والإعلان عن مشاريعنا الجديدة
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input 
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <Input 
                 type="email" 
                 placeholder="أدخل بريدك الإلكتروني"
-                className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-sm"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1"
+                disabled={isSubscribing}
               />
-              <Button className="bg-gradient-primary hover:shadow-glow transition-all duration-300">
-                <Mail className="w-4 h-4 ml-2" />
-                اشتراك
+              <Button 
+                type="submit"
+                disabled={isSubscribing}
+                className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
+              >
+                {isSubscribing ? (
+                  <>
+                    <Loader2 className="w-4 h-4 ml-2 animate-spin" />
+                    جاري الاشتراك...
+                  </>
+                ) : (
+                  <>
+                    <Mail className="w-4 h-4 ml-2" />
+                    اشتراك
+                  </>
+                )}
               </Button>
-            </div>
+            </form>
           </div>
         </div>
 

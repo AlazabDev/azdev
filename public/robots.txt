@@ -1,14 +1,31 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://alazab-tech.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Popular bots
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Twitterbot
+User-agent: Slurp
 Allow: /
 
-User-agent: facebookexternalhit
+User-agent: DuckDuckBot
 Allow: /
 
-User-agent: *
-Allow: /
+# Disallow sensitive or unnecessary paths
+Disallow: /api/
+Disallow: *.json$
+Disallow: *.xml$
+Disallow: /admin/
+Disallow: /private/
+
+# Host (specify the main domain)
+Host: https://alazab-tech.com

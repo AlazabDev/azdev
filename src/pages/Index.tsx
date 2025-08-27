@@ -6,8 +6,16 @@ import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import { useEffect } from 'react';
+import { defaultSEO, updatePageTitle, updateMetaDescription, addStructuredData, organizationStructuredData } from '@/lib/seo';
 
 const Index = () => {
+  // تحسين SEO
+  useEffect(() => {
+    updatePageTitle(defaultSEO.title);
+    updateMetaDescription(defaultSEO.description);
+    addStructuredData(organizationStructuredData);
+  }, []);
+
   // تحسين التنقل السلس
   useEffect(() => {
     const handleSmoothScroll = (e: Event) => {

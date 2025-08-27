@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import ContactModal from './ContactModal';
 import { 
   Mail, 
   Phone, 
@@ -9,10 +12,75 @@ import {
   Clock,
   Send,
   MessageSquare,
-  Building
+  Building,
+  Loader2
 } from 'lucide-react';
 
 const ContactSection = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    company: '',
+    projectType: '',
+    description: '',
+    budget: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.fullName || !formData.email || !formData.description) {
+      toast({
+        title: "خطأ في النموذج",
+        description: "يرجى ملء جميع الحقول المطلوبة",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      // محاكاة إرسال البيانات
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      toast({
+        title: "تم إرسال الرسالة بنجاح! ✨",
+        description: "سنتواصل معك خلال 24 ساعة كحد أقصى",
+      });
+      
+      // إعادة تعيين النموذج
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        company: '',
+        projectType: '',
+        description: '',
+        budget: ''
+      });
+    } catch (error) {
+      toast({
+        title: "فشل في الإرسال",
+        description: "حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       icon: Mail,
@@ -113,21 +181,29 @@ const ContactSection = () => {
                 أرسل لنا رسالة
               </h3>
               
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium mb-2">الاسم الكامل *</label>
                     <Input 
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
                       placeholder="أدخل اسمك الكامل"
                       className="w-full"
+                      required
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">البريد الإلكتروني *</label>
                     <Input 
+                      name="email"
                       type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       placeholder="example@company.com"
                       className="w-full"
+                      required
                     />
                   </div>
                 </div>
@@ -136,6 +212,9 @@ const ContactSection = () => {
                   <div>
                     <label className="block text-sm font-medium mb-2">رقم الهاتف</label>
                     <Input 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
                       placeholder="+966 50 123 4567"
                       className="w-full"
                     />
@@ -143,6 +222,9 @@ const ContactSection = () => {
                   <div>
                     <label className="block text-sm font-medium mb-2">اسم الشركة</label>
                     <Input 
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
                       placeholder="اسم شركتك أو مؤسستك"
                       className="w-full"
                     />
@@ -151,7 +233,12 @@ const ContactSection = () => {
 
                 <div>
                   <label className="block text-sm font-medium mb-2">نوع المشروع</label>
-                  <select className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
+                  <select 
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleInputChange}
+                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                  >
                     <option value="">اختر نوع المشروع</option>
                     <option value="web">تطوير تطبيق ويب</option>
                     <option value="mobile">تطوير تطبيق جوال</option>
@@ -166,14 +253,23 @@ const ContactSection = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">وصف المشروع *</label>
                   <Textarea 
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
                     placeholder="اشرح لنا تفاصيل مشروعك والنتائج المرغوبة..."
                     className="min-h-[120px] w-full"
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">الميزانية المتوقعة</label>
-                  <select className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
+                  <select 
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleInputChange}
+                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                  >
                     <option value="">اختر النطاق المناسب</option>
                     <option value="small">أقل من 50,000 ريال</option>
                     <option value="medium">50,000 - 150,000 ريال</option>
@@ -182,9 +278,23 @@ const ContactSection = () => {
                   </select>
                 </div>
 
-                <Button size="lg" className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300">
-                  <Send className="w-5 h-5 ml-2" />
-                  إرسال الرسالة
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 ml-2 animate-spin" />
+                      جاري الإرسال...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 ml-2" />
+                      إرسال الرسالة
+                    </>
+                  )}
                 </Button>
                 
                 <p className="text-sm text-muted-foreground text-center">
@@ -203,10 +313,30 @@ const ContactSection = () => {
             دعنا نناقش احتياجاتك ونقدم لك الحل الأمثل.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-primary hover:shadow-glow transition-all duration-300">
-              احجز استشارة مجانية
-            </Button>
-            <Button variant="outline" size="lg">
+            <ContactModal 
+              trigger={
+                <Button size="lg" className="bg-gradient-primary hover:shadow-glow transition-all duration-300">
+                  احجز استشارة مجانية
+                </Button>
+              }
+            />
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => {
+                // محاكاة تحميل ملف
+                toast({
+                  title: "جاري التحميل...",
+                  description: "سيتم تحميل نبذة الشركة خلال ثوانٍ",
+                });
+                setTimeout(() => {
+                  toast({
+                    title: "تم التحميل بنجاح!",
+                    description: "تم حفظ ملف نبذة الشركة في مجلد التحميلات",
+                  });
+                }, 2000);
+              }}
+            >
               تحميل نبذة الشركة
             </Button>
           </div>
