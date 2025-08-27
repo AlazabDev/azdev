@@ -10,63 +10,66 @@ import {
   Target,
   Lightbulb
 } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const TeamSection = () => {
+  const { t, language, isRTL } = useLanguage();
+
   const teamMembers = [
     {
-      name: 'أحمد محمد العزب',
-      role: 'مدير الفريق التقني',
-      specialties: ['إدارة المشاريع', 'الهندسة المعمارية', 'القيادة التقنية'],
-      experience: '12+ سنة',
-      description: 'خبير في قيادة الفرق التقنية وإدارة المشاريع المعقدة مع خلفية قوية في الهندسة المعمارية'
+      name: language === 'ar' ? 'أحمد محمد العزب' : 'Ahmed Mohamed Alazab',
+      role: language === 'ar' ? 'مدير الفريق التقني' : 'Technical Team Manager',
+      specialties: language === 'ar' ? ['إدارة المشاريع', 'الهندسة المعمارية', 'القيادة التقنية'] : ['Project Management', 'Architecture', 'Technical Leadership'],
+      experience: language === 'ar' ? '12+ سنة' : '12+ Years',
+      description: language === 'ar' ? 'خبير في قيادة الفرق التقنية وإدارة المشاريع المعقدة مع خلفية قوية في الهندسة المعمارية' : 'Expert in leading technical teams and managing complex projects with strong architectural background'
     },
     {
-      name: 'سارة أحمد محمود',
-      role: 'مطورة تطبيقات كبيرة',
+      name: language === 'ar' ? 'سارة أحمد محمود' : 'Sara Ahmed Mahmoud',
+      role: language === 'ar' ? 'مطورة تطبيقات كبيرة' : 'Senior Application Developer',
       specialties: ['React', 'Node.js', 'Mobile Apps'],
-      experience: '8+ سنوات',
-      description: 'متخصصة في تطوير تطبيقات الويب والجوال باستخدام أحدث التقنيات والأدوات البرمجية'
+      experience: language === 'ar' ? '8+ سنوات' : '8+ Years',
+      description: language === 'ar' ? 'متخصصة في تطوير تطبيقات الويب والجوال باستخدام أحدث التقنيات والأدوات البرمجية' : 'Specialized in web and mobile app development using latest technologies and programming tools'
     },
     {
-      name: 'محمد علي حسن',
-      role: 'مهندس أمن سيبراني',
+      name: language === 'ar' ? 'محمد علي حسن' : 'Mohamed Ali Hassan',
+      role: language === 'ar' ? 'مهندس أمن سيبراني' : 'Cybersecurity Engineer',
       specialties: ['Security', 'Penetration Testing', 'Compliance'],
-      experience: '10+ سنوات',
-      description: 'خبير في الأمن السيبراني وحماية البيانات مع شهادات عالمية في مجال الأمان الرقمي'
+      experience: language === 'ar' ? '10+ سنوات' : '10+ Years',
+      description: language === 'ar' ? 'خبير في الأمن السيبراني وحماية البيانات مع شهادات عالمية في مجال الأمان الرقمي' : 'Expert in cybersecurity and data protection with international certifications in digital security'
     },
     {
-      name: 'فاطمة خالد عبدالله',
-      role: 'متخصصة تحليل البيانات',
+      name: language === 'ar' ? 'فاطمة خالد عبدالله' : 'Fatima Khaled Abdullah',
+      role: language === 'ar' ? 'متخصصة تحليل البيانات' : 'Data Analytics Specialist',
       specialties: ['Data Science', 'AI/ML', 'Business Intelligence'],
-      experience: '6+ سنوات',
-      description: 'خبيرة في تحليل البيانات الضخمة والذكاء الاصطناعي مع خلفية أكاديمية قوية'
+      experience: language === 'ar' ? '6+ سنوات' : '6+ Years',
+      description: language === 'ar' ? 'خبيرة في تحليل البيانات الضخمة والذكاء الاصطناعي مع خلفية أكاديمية قوية' : 'Expert in big data analytics and artificial intelligence with strong academic background'
     }
   ];
 
   const teamStats = [
     {
       icon: Users,
-      title: 'أعضاء الفريق',
+      title: t('teamMembers'),
       value: '25+',
-      description: 'مطور ومتخصص'
+      description: language === 'ar' ? 'مطور ومتخصص' : 'Developers & Specialists'
     },
     {
       icon: Award,
-      title: 'سنوات الخبرة',
+      title: t('yearsExperience'),
       value: '15+',
-      description: 'في التكنولوجيا'
+      description: language === 'ar' ? 'في التكنولوجيا' : 'In Technology'
     },
     {
       icon: Target,
-      title: 'معدل النجاح',
+      title: language === 'ar' ? 'معدل النجاح' : 'Success Rate',
       value: '98%',
-      description: 'في تسليم المشاريع'
+      description: language === 'ar' ? 'في تسليم المشاريع' : 'Project Delivery'
     },
     {
       icon: Lightbulb,
-      title: 'براءات اختراع',
+      title: language === 'ar' ? 'براءات اختراع' : 'Patents',
       value: '12',
-      description: 'حل تقني مبتكر'
+      description: language === 'ar' ? 'حل تقني مبتكر' : 'Innovative Solutions'
     }
   ];
 
@@ -76,17 +79,16 @@ const TeamSection = () => {
         {/* العنوان */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 mb-6">
-            <Users className="w-4 h-4 text-secondary ml-2" />
-            <span className="text-sm text-secondary font-medium">فريقنا المتميز</span>
+            <Users className={`w-4 h-4 text-secondary ${isRTL ? 'ml-2' : 'mr-2'}`} />
+            <span className="text-sm text-secondary font-medium">{t('team')}</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-tech bg-clip-text text-transparent">
-              عقول مبدعة تصنع الفارق
+              {t('teamTitle')}
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            فريق من المتخصصين المحترفين والخبراء في مختلف المجالات التقنية، 
-            يعملون بشغف لتحقيق رؤيتك التكنولوجية
+            {t('teamDescription')}
           </p>
         </div>
 
@@ -143,7 +145,7 @@ const TeamSection = () => {
               </div>
               
               {/* روابط التواصل */}
-              <div className="flex justify-center space-x-2 rtl:space-x-reverse opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className={`flex justify-center space-x-2 ${isRTL ? 'space-x-reverse' : ''} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                 <Button variant="ghost" size="sm">
                   <Github className="w-4 h-4" />
                 </Button>
@@ -160,10 +162,14 @@ const TeamSection = () => {
 
         {/* رسالة الفريق */}
         <Card className="p-8 bg-gradient-hero/10 border-primary/20 text-center">
-          <h3 className="text-2xl font-bold mb-4">رؤيتنا</h3>
+          <h3 className="text-2xl font-bold mb-4">
+            {language === 'ar' ? 'رؤيتنا' : 'Our Vision'}
+          </h3>
           <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            نؤمن بأن التكنولوجيا هي المحرك الأساسي للتطوير والنمو. فريقنا يعمل بشغف لتحويل الأفكار 
-            المبتكرة إلى حلول عملية تساهم في بناء مستقبل رقمي أفضل لشركة العزب وعملائها.
+            {language === 'ar' 
+              ? 'نؤمن بأن التكنولوجيا هي المحرك الأساسي للتطوير والنمو. فريقنا يعمل بشغف لتحويل الأفكار المبتكرة إلى حلول عملية تساهم في بناء مستقبل رقمي أفضل لشركة العزب وعملائها.' 
+              : 'We believe that technology is the main driver of development and growth. Our team works passionately to transform innovative ideas into practical solutions that contribute to building a better digital future for Alazab Company and its clients.'
+            }
           </p>
         </Card>
       </div>

@@ -9,74 +9,62 @@ import {
   Bot,
   Workflow,
   BarChart3,
-  ArrowLeft
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ServicesSection = () => {
+  const { t, isRTL } = useLanguage();
+  
   const services = [
     {
       icon: Code2,
-      title: 'تطوير التطبيقات',
-      description: 'تطوير تطبيقات ويب وموبايل متطورة باستخدام أحدث التقنيات والأدوات البرمجية',
+      title: t('webDevelopment'),
+      description: t('webDevelopmentDesc'),
       features: ['React & Node.js', 'Flutter & React Native', 'Progressive Web Apps'],
       color: 'text-primary',
       bgColor: 'bg-primary/10'
     },
     {
-      icon: Database,
-      title: 'إدارة قواعد البيانات',
-      description: 'تصميم وإدارة قواعد البيانات المعقدة مع ضمان الأداء والأمان العالي',
-      features: ['PostgreSQL & MongoDB', 'Data Analytics', 'Real-time Sync'],
+      icon: Bot,
+      title: t('aiSolutions'),
+      description: t('aiSolutionsDesc'),
+      features: ['Machine Learning', 'Natural Language Processing', 'Computer Vision'],
       color: 'text-secondary',
       bgColor: 'bg-secondary/10'
     },
     {
       icon: Cloud,
-      title: 'الحلول السحابية',
-      description: 'نشر وإدارة التطبيقات على الخدمات السحابية مع ضمان التوفر العالي',
+      title: t('cloudSolutions'),
+      description: t('cloudSolutionsDesc'),
       features: ['AWS & Azure', 'Docker & Kubernetes', 'CI/CD Pipeline'],
       color: 'text-accent',
       bgColor: 'bg-accent/10'
     },
     {
       icon: Shield,
-      title: 'الأمن السيبراني',
-      description: 'حماية البيانات والأنظمة من التهديدات السيبرانية وضمان الامتثال',
+      title: t('cyberSecurity'),
+      description: t('cyberSecurityDesc'),
       features: ['Security Audits', 'Penetration Testing', 'Compliance'],
       color: 'text-destructive',
       bgColor: 'bg-destructive/10'
     },
     {
-      icon: Smartphone,
-      title: 'تطبيقات الجوال',
-      description: 'تطوير تطبيقات جوال أصلية ومختلطة لنظامي iOS و Android',
-      features: ['Native Development', 'Cross-platform', 'App Store Optimization'],
-      color: 'text-primary',
-      bgColor: 'bg-primary/10'
-    },
-    {
-      icon: Bot,
-      title: 'الذكاء الاصطناعي',
-      description: 'تطوير حلول الذكاء الاصطناعي وتعلم الآلة لأتمتة العمليات',
-      features: ['Machine Learning', 'Natural Language Processing', 'Computer Vision'],
-      color: 'text-secondary',
-      bgColor: 'bg-secondary/10'
-    },
-    {
-      icon: Workflow,
-      title: 'أتمتة العمليات',
-      description: 'أتمتة سير العمل وتحسين الكفاءة التشغيلية باستخدام أحدث التقنيات',
-      features: ['Process Automation', 'Workflow Management', 'Integration'],
-      color: 'text-accent',
-      bgColor: 'bg-accent/10'
-    },
-    {
       icon: BarChart3,
-      title: 'تحليل البيانات',
-      description: 'تحليل البيانات الضخمة واستخراج الرؤى الذكية لاتخاذ قرارات مدروسة',
+      title: t('dataAnalytics'),
+      description: t('dataAnalyticsDesc'),
       features: ['Business Intelligence', 'Data Visualization', 'Predictive Analytics'],
       color: 'text-primary',
       bgColor: 'bg-primary/10'
+    },
+    {
+      icon: Database,
+      title: t('systemIntegration'),
+      description: t('systemIntegrationDesc'),
+      features: ['PostgreSQL & MongoDB', 'Data Analytics', 'Real-time Sync'],
+      color: 'text-secondary',
+      bgColor: 'bg-secondary/10'
     }
   ];
 
@@ -86,20 +74,20 @@ const ServicesSection = () => {
         {/* العنوان */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-            <span className="text-sm text-primary font-medium">خدماتنا التقنية</span>
+            <span className="text-sm text-primary font-medium">{t('services')}</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-tech bg-clip-text text-transparent">
-              حلول تقنية شاملة
+              {t('servicesTitle')}
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            نقدم مجموعة واسعة من الخدمات التقنية المتطورة التي تلبي احتياجاتك وتحقق أهدافك الرقمية
+            {t('servicesDescription')}
           </p>
         </div>
 
         {/* الخدمات */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -118,8 +106,8 @@ const ServicesSection = () => {
                 </p>
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-sm text-muted-foreground flex items-center">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full ml-2"></div>
+                    <li key={featureIndex} className={`text-sm text-muted-foreground flex items-center ${isRTL ? 'mr-2' : 'ml-2'}`}>
+                      <div className={`w-1.5 h-1.5 bg-primary rounded-full ${isRTL ? 'mr-2' : 'ml-2'}`}></div>
                       {feature}
                     </li>
                   ))}
@@ -132,8 +120,8 @@ const ServicesSection = () => {
         {/* زر الإجراء */}
         <div className="text-center">
           <Button size="lg" className="bg-gradient-primary hover:shadow-glow transition-all duration-300">
-            استكشف جميع خدماتنا
-            <ArrowLeft className="w-5 h-5 mr-2" />
+            {t('exploreAllProjects')}
+            {isRTL ? <ArrowLeft className="w-5 h-5 mr-2" /> : <ArrowRight className="w-5 h-5 ml-2" />}
           </Button>
         </div>
       </div>

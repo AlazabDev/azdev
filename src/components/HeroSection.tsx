@@ -74,11 +74,11 @@ const HeroSection = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-secondary mb-2">15+</div>
-              <div className="text-sm text-muted-foreground">{language === 'ar' ? 'تقنية متطورة' : 'Advanced Tech'}</div>
+              <div className="text-sm text-muted-foreground">{t('advancedTech')}</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-accent mb-2">24/7</div>
-              <div className="text-sm text-muted-foreground">{language === 'ar' ? 'دعم فني' : 'Tech Support'}</div>
+              <div className="text-sm text-muted-foreground">{t('techSupport')}</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-primary mb-2">100%</div>

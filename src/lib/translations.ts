@@ -92,6 +92,10 @@ export const translations = {
     sendError: 'فشل في الإرسال',
     sendErrorDesc: 'حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى',
     
+    // Additional translations
+    advancedTech: 'تقنية متطورة',
+    techSupport: 'دعم فني',
+    
     // 404 Page
     pageNotFound: 'الصفحة غير موجودة',
     pageNotFoundDesc: 'عذراً، لا يمكننا العثور على الصفحة التي تبحث عنها. ربما تم نقلها أو حذفها أو أن الرابط غير صحيح.',
@@ -194,6 +198,10 @@ export const translations = {
     messageResponse: 'We will contact you within 24 hours maximum',
     sendError: 'Send Failed',
     sendErrorDesc: 'An error occurred while sending the message, please try again',
+    
+    // Additional translations
+    advancedTech: 'Advanced Tech',
+    techSupport: 'Tech Support',
     
     // 404 Page
     pageNotFound: 'Page Not Found',
