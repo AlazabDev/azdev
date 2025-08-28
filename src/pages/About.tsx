@@ -24,8 +24,8 @@ const About = () => {
         ? 'تعرف على شركة العزب وفريق تكنولوجيا المعلومات، رؤيتنا، مهمتنا، وقيمنا في تقديم حلول تقنية مبتكرة للمشاريع الإنشائية والمعمارية'
         : 'Learn about Alazab Company and IT Team, our vision, mission, and values in providing innovative technical solutions for construction and architectural projects',
       keywords: language === 'ar' 
-        ? 'عن العزب, شركة العزب, فريق التكنولوجيا, رؤية الشركة, مهمة الشركة'
-        : 'about alazab, alazab company, technology team, company vision, company mission'
+        ? ['عن العزب', 'شركة العزب', 'فريق التكنولوجيا', 'رؤية الشركة', 'مهمة الشركة']
+        : ['about alazab', 'alazab company', 'technology team', 'company vision', 'company mission']
     });
   }, [language]);
 

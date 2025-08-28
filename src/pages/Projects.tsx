@@ -32,8 +32,8 @@ const Projects = () => {
         ? 'استعرض مجموعة من أهم المشاريع التقنية التي قمنا بتطويرها في مجال الإنشاءات والخدمات المعمارية'
         : 'Explore a collection of our most important technical projects developed in construction and architectural services',
       keywords: language === 'ar' 
-        ? 'مشاريع تقنية, نظام إدارة المشاريع, تطبيق الصيانة, منصة البيانات, البنية السحابية'
-        : 'technical projects, project management system, maintenance app, data platform, cloud infrastructure'
+        ? ['مشاريع تقنية', 'نظام إدارة المشاريع', 'تطبيق الصيانة', 'منصة البيانات', 'البنية السحابية']
+        : ['technical projects', 'project management system', 'maintenance app', 'data platform', 'cloud infrastructure']
     });
   }, [language]);
 

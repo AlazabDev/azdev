@@ -43,6 +43,37 @@ export const addStructuredData = (data: object) => {
   document.head.appendChild(script);
 };
 
+export const updateSEO = (seoData: SEOData) => {
+  updatePageTitle(seoData.title);
+  updateMetaDescription(seoData.description);
+  
+  // Update keywords meta tag
+  if (seoData.keywords) {
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', seoData.keywords.join(', '));
+    } else {
+      const newKeywordsMeta = document.createElement('meta');
+      newKeywordsMeta.name = 'keywords';
+      newKeywordsMeta.content = seoData.keywords.join(', ');
+      document.head.appendChild(newKeywordsMeta);
+    }
+  }
+  
+  // Update canonical URL
+  if (seoData.canonicalUrl) {
+    const existingCanonical = document.querySelector('link[rel="canonical"]');
+    if (existingCanonical) {
+      existingCanonical.setAttribute('href', seoData.canonicalUrl);
+    } else {
+      const canonicalLink = document.createElement('link');
+      canonicalLink.rel = 'canonical';
+      canonicalLink.href = seoData.canonicalUrl;
+      document.head.appendChild(canonicalLink);
+    }
+  }
+};
+
 // Structured data for the organization
 export const organizationStructuredData = {
   "@context": "https://schema.org",

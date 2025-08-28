@@ -33,8 +33,8 @@ const Contact = () => {
         ? 'تواصل مع فريق العزب التقني - احصل على استشارة مجانية، اطلب عرض سعر، أو ابدأ مشروعك التقني الجديد'
         : 'Contact Alazab Tech team - get free consultation, request quote, or start your new technical project',
       keywords: language === 'ar' 
-        ? 'تواصل معنا, استشارة تقنية, عرض سعر, دعم فني, خدمة العملاء'
-        : 'contact us, technical consultation, quote request, technical support, customer service'
+        ? ['تواصل معنا', 'استشارة تقنية', 'عرض سعر', 'دعم فني', 'خدمة العملاء']
+        : ['contact us', 'technical consultation', 'quote request', 'technical support', 'customer service']
     });
   }, [language]);
 

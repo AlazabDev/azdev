@@ -35,8 +35,8 @@ const MaintenanceSystem = () => {
         ? 'نظام متطور لإدارة صيانة المحلات التجارية - طلب صيانة، تتبع الطلبات، إدارة الفنيين، تقارير مفصلة'
         : 'Advanced system for managing commercial store maintenance - maintenance requests, order tracking, technician management, detailed reports',
       keywords: language === 'ar' 
-        ? 'نظام الصيانة, صيانة المحلات, الصيانة المعمارية, نظام طلب الصيانة, إدارة الصيانة'
-        : 'maintenance system, store maintenance, architectural maintenance, maintenance request system, maintenance management'
+        ? ['نظام الصيانة', 'صيانة المحلات', 'الصيانة المعمارية', 'نظام طلب الصيانة', 'إدارة الصيانة']
+        : ['maintenance system', 'store maintenance', 'architectural maintenance', 'maintenance request system', 'maintenance management']
     });
   }, [language]);
 

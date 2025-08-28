@@ -32,8 +32,8 @@ const Services = () => {
         ? 'اكتشف مجموعة شاملة من الخدمات التقنية المتطورة: تطوير التطبيقات، الذكاء الاصطناعي، الحلول السحابية، الأمن السيبراني وأكثر'
         : 'Discover our comprehensive range of advanced technical services: application development, AI, cloud solutions, cybersecurity and more',
       keywords: language === 'ar' 
-        ? 'خدمات تقنية, تطوير التطبيقات, الذكاء الاصطناعي, الحلول السحابية, الأمن السيبراني'
-        : 'technical services, application development, artificial intelligence, cloud solutions, cybersecurity'
+        ? ['خدمات تقنية', 'تطوير التطبيقات', 'الذكاء الاصطناعي', 'الحلول السحابية', 'الأمن السيبراني']
+        : ['technical services', 'application development', 'artificial intelligence', 'cloud solutions', 'cybersecurity']
     });
   }, [language]);
   
