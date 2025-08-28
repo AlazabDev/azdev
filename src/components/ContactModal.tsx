@@ -47,8 +47,25 @@ const ContactModal = ({ trigger, title = "احجز استشارة مجانية",
     setIsSubmitting(true);
     
     try {
-      // محاكاة إرسال البيانات
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const response = await fetch('https://shindkpwyxpsexhhfsyg.supabase.co/functions/v1/send-contact-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNoaW5ka3B3eXhwc2V4aGhmc3lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwNDg2MTMsImV4cCI6MjA2ODYyNDYxM30.DqI8t-vaf8siB9Z6VN42Zi5ZLkj6Xf3bYIwcONp4fNs'}`
+        },
+        body: JSON.stringify({
+          type: 'consultation',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          message: formData.message
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('فشل في إرسال البيانات');
+      }
       
       toast({
         title: "تم حجز الاستشارة بنجاح! 🎉",
@@ -65,6 +82,7 @@ const ContactModal = ({ trigger, title = "احجز استشارة مجانية",
       });
       setOpen(false);
     } catch (error) {
+      console.error('Error sending consultation request:', error);
       toast({
         title: "فشل في الحجز",
         description: "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى",
