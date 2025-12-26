@@ -9,19 +9,16 @@ export interface SEOData {
 }
 
 export const defaultSEO: SEOData = {
-  title: 'العزب تك - فريق تكنولوجيا المعلومات | حلول تقنية متطورة',
-  description: 'فريق تكنولوجيا المعلومات في شركة العزب يقدم حلول تقنية مبتكرة للمشاريع الإنشائية والمعمارية. تطوير التطبيقات، الذكاء الاصطناعي، والأمن السيبراني.',
+  title: 'alazab.dev - حلول تقنية متطورة | Advanced Tech Solutions',
+  description: 'فريق متخصص في تكنولوجيا المعلومات يقدم حلول تقنية مبتكرة ومتطورة للمشاريع الإنشائية والمعمارية.',
   keywords: [
+    'alazab.dev',
     'تكنولوجيا المعلومات',
     'تطوير التطبيقات',
     'الذكاء الاصطناعي',
-    'المشاريع الإنشائية',
     'الحلول التقنية',
-    'شركة العزب',
     'البرمجة',
-    'الأمن السيبراني',
-    'تحليل البيانات',
-    'الحلول السحابية'
+    'الأمن السيبراني'
   ]
 };
 
@@ -37,6 +34,9 @@ export const updateMetaDescription = (description: string) => {
 };
 
 export const addStructuredData = (data: object) => {
+  const existingScript = document.querySelector('script[type="application/ld+json"]');
+  if (existingScript) existingScript.remove();
+  
   const script = document.createElement('script');
   script.type = 'application/ld+json';
   script.textContent = JSON.stringify(data);
@@ -46,55 +46,24 @@ export const addStructuredData = (data: object) => {
 export const updateSEO = (seoData: SEOData) => {
   updatePageTitle(seoData.title);
   updateMetaDescription(seoData.description);
-  
-  // Update keywords meta tag
-  if (seoData.keywords) {
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', seoData.keywords.join(', '));
-    } else {
-      const newKeywordsMeta = document.createElement('meta');
-      newKeywordsMeta.name = 'keywords';
-      newKeywordsMeta.content = seoData.keywords.join(', ');
-      document.head.appendChild(newKeywordsMeta);
-    }
-  }
-  
-  // Update canonical URL
-  if (seoData.canonicalUrl) {
-    const existingCanonical = document.querySelector('link[rel="canonical"]');
-    if (existingCanonical) {
-      existingCanonical.setAttribute('href', seoData.canonicalUrl);
-    } else {
-      const canonicalLink = document.createElement('link');
-      canonicalLink.rel = 'canonical';
-      canonicalLink.href = seoData.canonicalUrl;
-      document.head.appendChild(canonicalLink);
-    }
-  }
 };
 
-// Structured data for the organization
 export const organizationStructuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "العزب تك - فريق تكنولوجيا المعلومات",
-  "description": "فريق تكنولوجيا المعلومات في شركة العزب",
-  "url": "https://alazab-tech.com",
-  "logo": "https://alazab-tech.com/logo.png",
+  "name": "alazab.dev",
+  "description": "حلول تقنية متطورة",
+  "url": "https://alazab.dev",
+  "logo": "https://alazab.dev/logo021.png",
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+966-11-234-5678",
     "contactType": "customer support",
-    "email": "tech@alazab.com"
+    "email": "info@alazab.dev"
   },
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "SA",
     "addressLocality": "الرياض"
-  },
-  "sameAs": [
-    "https://linkedin.com/company/alazab-tech",
-    "https://github.com/alazab-tech"
-  ]
+  }
 };

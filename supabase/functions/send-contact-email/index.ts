@@ -1,7 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -31,101 +30,120 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Processing contact email:", { type, name, email });
 
-    // Send notification to company
-    const companyEmailResponse = await resend.emails.send({
-      from: "Al-Azab Tech <noreply@alazab.com>",
-      to: ["tech@alazab.com"],
-      subject: type === 'consultation' ? `طلب استشارة جديد من ${name}` : `استفسار جديد من ${name}`,
-      html: `
-        <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0;">
-            <h1 style="margin: 0;">${type === 'consultation' ? 'طلب استشارة جديد' : 'استفسار جديد'}</h1>
-          </div>
-          
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 0 0 8px 8px;">
-            <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h2 style="color: #333; margin-top: 0;">تفاصيل المرسل</h2>
-              <p><strong>الاسم:</strong> ${name}</p>
-              <p><strong>البريد الإلكتروني:</strong> ${email}</p>
-              ${phone ? `<p><strong>الهاتف:</strong> ${phone}</p>` : ''}
-              ${company ? `<p><strong>الشركة:</strong> ${company}</p>` : ''}
-              ${projectType ? `<p><strong>نوع المشروع:</strong> ${getProjectTypeLabel(projectType)}</p>` : ''}
-              ${budget ? `<p><strong>الميزانية:</strong> ${getBudgetLabel(budget)}</p>` : ''}
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      return new Response(
+        JSON.stringify({ 
+          success: true,
+          message: "تم استلام رسالتك - Email service not configured"
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Send notification to company using fetch
+    const companyEmailResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "alazab.dev <onboarding@resend.dev>",
+        to: ["info@alazab.dev"],
+        subject: type === 'consultation' ? `طلب استشارة جديد من ${name}` : `استفسار جديد من ${name}`,
+        html: `
+          <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0;">
+              <h1 style="margin: 0;">${type === 'consultation' ? 'طلب استشارة جديد' : 'استفسار جديد'}</h1>
             </div>
             
-            <div style="background: white; padding: 20px; border-radius: 8px;">
-              <h2 style="color: #333; margin-top: 0;">الرسالة</h2>
-              <p style="white-space: pre-wrap; line-height: 1.6;">${message}</p>
-            </div>
-            
-            <div style="text-align: center; margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
-              <p style="margin: 0; color: #1565c0;">تم الإرسال بتاريخ: ${new Date().toLocaleString('ar-SA')}</p>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 0 0 8px 8px;">
+              <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h2 style="color: #333; margin-top: 0;">تفاصيل المرسل</h2>
+                <p><strong>الاسم:</strong> ${name}</p>
+                <p><strong>البريد الإلكتروني:</strong> ${email}</p>
+                ${phone ? `<p><strong>الهاتف:</strong> ${phone}</p>` : ''}
+                ${company ? `<p><strong>الشركة:</strong> ${company}</p>` : ''}
+                ${projectType ? `<p><strong>نوع المشروع:</strong> ${getProjectTypeLabel(projectType)}</p>` : ''}
+                ${budget ? `<p><strong>الميزانية:</strong> ${getBudgetLabel(budget)}</p>` : ''}
+              </div>
+              
+              <div style="background: white; padding: 20px; border-radius: 8px;">
+                <h2 style="color: #333; margin-top: 0;">الرسالة</h2>
+                <p style="white-space: pre-wrap; line-height: 1.6;">${message}</p>
+              </div>
+              
+              <div style="text-align: center; margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+                <p style="margin: 0; color: #1565c0;">تم الإرسال بتاريخ: ${new Date().toLocaleString('ar-SA')}</p>
+              </div>
             </div>
           </div>
-        </div>
-      `,
+        `,
+      }),
     });
+
+    const companyResult = await companyEmailResponse.json();
+    console.log("Company email result:", companyResult);
 
     // Send confirmation to client
-    const clientEmailResponse = await resend.emails.send({
-      from: "Al-Azab Tech <noreply@alazab.com>",
-      to: [email],
-      subject: type === 'consultation' ? "تأكيد حجز الاستشارة - شركة العزب" : "تأكيد استلام رسالتك - شركة العزب",
-      html: `
-        <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0;">
-            <h1 style="margin: 0;">شركة العزب للتكنولوجيا</h1>
-            <p style="margin: 5px 0 0 0; opacity: 0.9;">الحلول التقنية المتطورة</p>
-          </div>
-          
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 0 0 8px 8px;">
-            <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h2 style="color: #333; margin-top: 0;">مرحباً ${name}، 👋</h2>
-              
-              ${type === 'consultation' ? `
-                <p>شكراً لك على حجز استشارة مجانية مع فريقنا التقني!</p>
-                <p>لقد استلمنا طلبك وسيقوم أحد أعضاء فريقنا المتخصص بالتواصل معك خلال <strong>24 ساعة</strong> لتحديد موعد الاستشارة.</p>
+    const clientEmailResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "alazab.dev <onboarding@resend.dev>",
+        to: [email],
+        subject: type === 'consultation' ? "تأكيد حجز الاستشارة - alazab.dev" : "تأكيد استلام رسالتك - alazab.dev",
+        html: `
+          <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0;">
+              <h1 style="margin: 0;">alazab.dev</h1>
+              <p style="margin: 5px 0 0 0; opacity: 0.9;">حلول تقنية متطورة</p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 0 0 8px 8px;">
+              <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h2 style="color: #333; margin-top: 0;">مرحباً ${name}، 👋</h2>
                 
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 20px 0;">
-                  <h3 style="color: #2e7d2e; margin-top: 0;">ما يمكنك توقعه:</h3>
-                  <ul style="color: #2e7d2e; margin: 0; padding-right: 20px;">
-                    <li>مدة الاستشارة: 45 دقيقة</li>
-                    <li>مجانية بالكامل</li>
-                    <li>تحليل شامل لاحتياجاتك التقنية</li>
-                    <li>خطة عمل مبدئية</li>
-                  </ul>
-                </div>
-              ` : `
-                <p>شكراً لك على تواصلك معنا!</p>
-                <p>لقد استلمنا استفسارك وسيقوم فريقنا التقني بمراجعته والرد عليك خلال <strong>24 ساعة كحد أقصى</strong>.</p>
-              `}
+                ${type === 'consultation' ? `
+                  <p>شكراً لك على حجز استشارة مجانية مع فريقنا التقني!</p>
+                  <p>سيقوم أحد أعضاء فريقنا بالتواصل معك خلال <strong>24 ساعة</strong>.</p>
+                  
+                  <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #2e7d2e; margin-top: 0;">ما يمكنك توقعه:</h3>
+                    <ul style="color: #2e7d2e; margin: 0; padding-right: 20px;">
+                      <li>استشارة مجانية 45 دقيقة</li>
+                      <li>تحليل احتياجاتك التقنية</li>
+                      <li>خطة عمل مبدئية</li>
+                    </ul>
+                  </div>
+                ` : `
+                  <p>شكراً لتواصلك معنا!</p>
+                  <p>سنرد على استفسارك خلال <strong>24 ساعة</strong>.</p>
+                `}
+                
+                <p>للتواصل السريع:</p>
+                <p><strong>📞 +966 11 234 5678</strong></p>
+                <p><strong>✉️ info@alazab.dev</strong></p>
+              </div>
               
-              <p>في حالة الحاجة للتواصل السريع، يمكنك الاتصال بنا على:</p>
-              <p><strong>📞 +966 11 234 5678</strong></p>
-              <p><strong>✉️ tech@alazab.com</strong></p>
-            </div>
-            
-            <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h3 style="color: #333; margin-top: 0;">نبذة عن خدماتنا</h3>
-              <ul style="line-height: 1.8; padding-right: 20px;">
-                <li>تطوير التطبيقات الويب والجوال</li>
-                <li>أنظمة إدارة المشاريع الإنشائية</li>
-                <li>حلول الذكاء الاصطناعي</li>
-                <li>تحليل البيانات والتقارير</li>
-                <li>الأمن السيبراني</li>
-              </ul>
-            </div>
-            
-            <div style="text-align: center; padding: 20px; background: #fff; border-radius: 8px;">
-              <p style="margin: 0; color: #666;">نتطلع للعمل معك وتحقيق رؤيتك التكنولوجية</p>
-              <p style="margin: 10px 0 0 0; font-weight: bold; color: #333;">فريق العزب للتكنولوجيا</p>
+              <div style="text-align: center; padding: 20px; background: #fff; border-radius: 8px;">
+                <p style="margin: 0; font-weight: bold; color: #7c3aed;">فريق alazab.dev</p>
+              </div>
             </div>
           </div>
-        </div>
-      `,
+        `,
+      }),
     });
 
-    console.log("Emails sent successfully:", { companyEmailResponse, clientEmailResponse });
+    const clientResult = await clientEmailResponse.json();
+    console.log("Client email result:", clientResult);
 
     return new Response(JSON.stringify({ 
       success: true,

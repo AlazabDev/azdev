@@ -3,8 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { 
-  Code, 
+  Code2, 
   Mail, 
   Phone, 
   MapPin, 
@@ -13,11 +14,14 @@ import {
   Github,
   ExternalLink,
   Heart,
-  Loader2
+  Loader2,
+  Send,
+  ArrowUpRight
 } from 'lucide-react';
 
 const Footer = () => {
   const { toast } = useToast();
+  const { t, language, isRTL } = useLanguage();
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [email, setEmail] = useState('');
 
@@ -26,8 +30,8 @@ const Footer = () => {
     
     if (!email) {
       toast({
-        title: "خطأ",
-        description: "يرجى إدخال بريدك الإلكتروني",
+        title: language === 'ar' ? 'خطأ' : 'Error',
+        description: language === 'ar' ? 'يرجى إدخال بريدك الإلكتروني' : 'Please enter your email',
         variant: "destructive",
       });
       return;
@@ -36,19 +40,18 @@ const Footer = () => {
     setIsSubscribing(true);
     
     try {
-      // محاكاة إرسال البيانات
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast({
-        title: "تم الاشتراك بنجاح! 🎉",
-        description: "ستصلك آخر المستجدات التقنية على بريدك الإلكتروني",
+        title: language === 'ar' ? 'تم الاشتراك بنجاح! 🎉' : 'Subscribed successfully! 🎉',
+        description: language === 'ar' ? 'ستصلك آخر المستجدات التقنية' : 'You will receive the latest tech updates',
       });
       
       setEmail('');
     } catch (error) {
       toast({
-        title: "فشل في الاشتراك",
-        description: "حدث خطأ أثناء الاشتراك، يرجى المحاولة مرة أخرى",
+        title: language === 'ar' ? 'فشل في الاشتراك' : 'Subscription failed',
+        description: language === 'ar' ? 'حدث خطأ، يرجى المحاولة مرة أخرى' : 'An error occurred, please try again',
         variant: "destructive",
       });
     } finally {
@@ -56,233 +59,193 @@ const Footer = () => {
     }
   };
 
-  const handleSocialClick = (platform: string) => {
-    toast({
-      title: `${platform} قريباً!`,
-      description: "نعمل على إطلاق صفحاتنا على وسائل التواصل الاجتماعي",
-    });
-  };
-
-  const services = [
-    'تطوير التطبيقات',
-    'إدارة قواعد البيانات',
-    'الحلول السحابية',
-    'الأمن السيبراني',
-    'الذكاء الاصطناعي',
-    'تحليل البيانات'
-  ];
+  const services = language === 'ar' 
+    ? ['تطوير التطبيقات', 'الحلول السحابية', 'الأمن السيبراني', 'الذكاء الاصطناعي', 'تحليل البيانات']
+    : ['App Development', 'Cloud Solutions', 'Cybersecurity', 'AI Solutions', 'Data Analytics'];
 
   const quickLinks = [
-    { name: 'من نحن', href: '#about' },
-    { name: 'خدماتنا', href: '#services' },
-    { name: 'مشاريعنا', href: '#projects' },
-    { name: 'فريقنا', href: '#team' },
-    { name: 'تواصل معنا', href: '#contact' },
-    { name: 'المدونة التقنية', href: '#blog' }
+    { name: t('home'), href: '#home' },
+    { name: t('services'), href: '#services' },
+    { name: t('projects'), href: '#projects' },
+    { name: t('team'), href: '#team' },
+    { name: t('contact'), href: '#contact' }
   ];
 
-  const resources = [
-    { name: 'الوثائق التقنية', href: '#docs' },
-    { name: 'دليل المطورين', href: '#dev-guide' },
-    { name: 'الأسئلة الشائعة', href: '#faq' },
-    { name: 'الدعم التقني', href: '#support' },
-    { name: 'التدريب', href: '#training' },
-    { name: 'الشراكات', href: '#partnerships' }
+  const socialLinks = [
+    { icon: Github, name: 'GitHub', href: '#' },
+    { icon: Linkedin, name: 'LinkedIn', href: '#' },
+    { icon: Twitter, name: 'Twitter', href: '#' }
   ];
 
   return (
-    <footer className="bg-background border-t border-border">
-      <div className="container mx-auto px-4">
-        {/* القسم الرئيسي */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* معلومات الشركة */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse mb-4">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Code className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <div className="font-bold text-lg">العزب تك</div>
-                <div className="text-sm text-muted-foreground">فريق تكنولوجيا المعلومات</div>
-              </div>
+    <footer className="relative bg-card border-t border-border overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-10" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Newsletter Section */}
+        <div className="py-12 -mt-px">
+          <div className="glass rounded-2xl p-8 border border-primary/20">
+            <div className="max-w-2xl mx-auto text-center">
+              <h3 className="text-2xl font-bold mb-3">
+                <span className="text-gradient">{t('newsletter')}</span>
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                {t('newsletterDesc')}
+              </p>
+              <form onSubmit={handleNewsletterSubmit} className={`flex flex-col sm:flex-row gap-3 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
+                <Input 
+                  type="email" 
+                  placeholder={language === 'ar' ? 'أدخل بريدك الإلكتروني' : 'Enter your email'}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 bg-background/50"
+                  disabled={isSubscribing}
+                />
+                <Button 
+                  type="submit"
+                  disabled={isSubscribing}
+                  className="bg-gradient-primary text-white shadow-glow hover:shadow-glow-lg transition-all duration-300"
+                >
+                  {isSubscribing ? (
+                    <Loader2 className={`w-4 h-4 animate-spin ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                  ) : (
+                    <Send className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                  )}
+                  {t('subscribe')}
+                </Button>
+              </form>
             </div>
+          </div>
+        </div>
+
+        <Separator className="opacity-50" />
+
+        {/* Main Footer */}
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div className="lg:col-span-1">
+            <a href="#home" className={`flex items-center gap-3 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
+                <Code2 className="w-5 h-5 text-white" />
+              </div>
+              <div className={isRTL ? 'text-right' : 'text-left'}>
+                <div className="font-bold text-lg">alazab<span className="text-primary">.dev</span></div>
+                <div className="text-xs text-muted-foreground">{t('companySubtitle')}</div>
+              </div>
+            </a>
             
-            <p className="text-muted-foreground mb-6 leading-relaxed">
-              نطور الحلول التقنية المبتكرة لشركة العزب والمشاريع الإنشائية والمعمارية، 
-              باستخدام أحدث التقنيات لضمان أفضل النتائج.
+            <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+              {t('footerDescription')}
             </p>
             
-            {/* معلومات الاتصال السريعة */}
+            {/* Contact Info */}
             <div className="space-y-2 text-sm">
-              <div className="flex items-center text-muted-foreground">
-                <Mail className="w-4 h-4 ml-2" />
-                tech@alazab.com
-              </div>
-              <div className="flex items-center text-muted-foreground">
-                <Phone className="w-4 h-4 ml-2" />
+              <a href="mailto:info@alazab.dev" className={`flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Mail className="w-4 h-4" />
+                info@alazab.dev
+              </a>
+              <div className={`flex items-center gap-2 text-muted-foreground ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Phone className="w-4 h-4" />
                 +966 11 234 5678
               </div>
-              <div className="flex items-center text-muted-foreground">
-                <MapPin className="w-4 h-4 ml-2" />
-                الرياض، المملكة العربية السعودية
+              <div className={`flex items-center gap-2 text-muted-foreground ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <MapPin className="w-4 h-4" />
+                {language === 'ar' ? 'الرياض، السعودية' : 'Riyadh, Saudi Arabia'}
               </div>
             </div>
           </div>
 
-          {/* الخدمات */}
+          {/* Services */}
           <div>
-            <h3 className="font-bold text-lg mb-4">خدماتنا التقنية</h3>
-            <ul className="space-y-3">
+            <h4 className="font-bold mb-4">{t('services')}</h4>
+            <ul className="space-y-2">
               {services.map((service, index) => (
                 <li key={index}>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                  <a 
+                    href="#services" 
+                    className={`text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group ${isRTL ? 'flex-row-reverse' : ''}`}
+                  >
                     {service}
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* روابط سريعة */}
+          {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">روابط سريعة</h3>
-            <ul className="space-y-3">
+            <h4 className="font-bold mb-4">{t('quickLinks')}</h4>
+            <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a 
                     href={link.href} 
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center group"
+                    className={`text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group ${isRTL ? 'flex-row-reverse' : ''}`}
                   >
                     {link.name}
-                    <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* الموارد والدعم */}
+          {/* Social */}
           <div>
-            <h3 className="font-bold text-lg mb-4">الموارد والدعم</h3>
-            <ul className="space-y-3 mb-6">
-              {resources.map((resource, index) => (
-                <li key={index}>
-                  <a 
-                    href={resource.href} 
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center group"
+            <h4 className="font-bold mb-4">{t('followUs')}</h4>
+            <div className={`flex gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+              {socialLinks.map((social, index) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={index}
+                    href={social.href}
+                    className="w-10 h-10 rounded-xl glass border border-border/50 flex items-center justify-center hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 group"
+                    aria-label={social.name}
                   >
-                    {resource.name}
-                    <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                   </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* وسائل التواصل الاجتماعي */}
-            <div>
-              <h4 className="font-semibold mb-3">تابعنا</h4>
-              <div className="flex space-x-3 rtl:space-x-reverse">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="hover:bg-primary/10"
-                  onClick={() => handleSocialClick('LinkedIn')}
-                >
-                  <Linkedin className="w-4 h-4" />
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="hover:bg-primary/10"
-                  onClick={() => handleSocialClick('GitHub')}
-                >
-                  <Github className="w-4 h-4" />
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="hover:bg-primary/10"
-                  onClick={() => handleSocialClick('Twitter')}
-                >
-                  <Twitter className="w-4 h-4" />
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="hover:bg-primary/10"
-                  onClick={() => handleSocialClick('البريد الإلكتروني')}
-                >
-                  <Mail className="w-4 h-4" />
-                </Button>
+                );
+              })}
+            </div>
+            
+            {/* Live Status */}
+            <div className="mt-6">
+              <div className="live-indicator inline-flex">
+                <span>{language === 'ar' ? 'متاح الآن' : 'Available Now'}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <Separator />
+        <Separator className="opacity-50" />
 
-        {/* النشرة الإخبارية */}
-        <div className="py-8">
-          <div className="bg-gradient-card rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">
-              <span className="bg-gradient-tech bg-clip-text text-transparent">
-                اشترك في نشرتنا التقنية
-              </span>
-            </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              احصل على آخر المستجدات التقنية والنصائح البرمجية والإعلان عن مشاريعنا الجديدة
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input 
-                type="email" 
-                placeholder="أدخل بريدك الإلكتروني"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1"
-                disabled={isSubscribing}
-              />
-              <Button 
-                type="submit"
-                disabled={isSubscribing}
-                className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
-              >
-                {isSubscribing ? (
-                  <>
-                    <Loader2 className="w-4 h-4 ml-2 animate-spin" />
-                    جاري الاشتراك...
-                  </>
-                ) : (
-                  <>
-                    <Mail className="w-4 h-4 ml-2" />
-                    اشتراك
-                  </>
-                )}
-              </Button>
-            </form>
-          </div>
-        </div>
-
-        <Separator />
-
-        {/* حقوق الطبع والنشر */}
-        <div className="py-6 flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-          <div className="flex items-center mb-4 sm:mb-0">
-            <span>© 2024 شركة العزب - فريق تكنولوجيا المعلومات. جميع الحقوق محفوظة.</span>
+        {/* Bottom */}
+        <div className={`py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
+          <div className="flex items-center gap-1">
+            <span>{t('copyright').replace('2024', new Date().getFullYear().toString())}</span>
           </div>
           
-          <div className="flex items-center space-x-6 rtl:space-x-reverse">
-            <a href="#" className="hover:text-primary transition-colors">سياسة الخصوصية</a>
-            <a href="#" className="hover:text-primary transition-colors">شروط الاستخدام</a>
-            <a href="#" className="hover:text-primary transition-colors">ملفات تعريف الارتباط</a>
+          <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <a href="#" className="hover:text-primary transition-colors">
+              {language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
+            </a>
+            <a href="#" className="hover:text-primary transition-colors">
+              {language === 'ar' ? 'الشروط والأحكام' : 'Terms of Service'}
+            </a>
           </div>
         </div>
 
-        {/* رسالة المطورين */}
-        <div className="py-4 text-center text-xs text-muted-foreground border-t border-border/50">
-          <div className="flex items-center justify-center">
-            <span>تم تطوير هذا الموقع بـ</span>
-            <Heart className="w-3 h-3 text-red-500 mx-1" />
-            <span>من قبل فريق العزب التقني</span>
+        {/* Made with love */}
+        <div className="py-4 text-center text-xs text-muted-foreground border-t border-border/30">
+          <div className={`flex items-center justify-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span>{language === 'ar' ? 'صُنع بـ' : 'Made with'}</span>
+            <Heart className="w-3 h-3 text-red-500 animate-pulse" />
+            <span>{language === 'ar' ? 'بواسطة' : 'by'}</span>
+            <span className="font-medium text-foreground">alazab.dev</span>
           </div>
         </div>
       </div>
