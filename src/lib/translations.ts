@@ -10,13 +10,13 @@ export const translations = {
     startProject: 'ابدأ مشروعك',
     
     // Company Info
-    companyName: 'العزب تك',
-    companySubtitle: 'فريق تكنولوجيا المعلومات',
+    companyName: 'alazab.dev',
+    companySubtitle: 'حلول تقنية متطورة',
     
     // Hero Section
-    heroTitle: 'نطور المستقبل التقني',
-    heroSubtitle: 'للمشاريع الإنشائية والمعمارية',
-    heroDescription: 'فريق متخصص في تكنولوجيا المعلومات يقدم حلول تقنية مبتكرة ومتطورة لشركة العزب في مجال الإنشاءات والخدمات المعمارية',
+    heroTitle: 'نطور المستقبل الرقمي',
+    heroSubtitle: 'بحلول تقنية مبتكرة',
+    heroDescription: 'فريق متخصص في تكنولوجيا المعلومات يقدم حلول تقنية مبتكرة ومتطورة للمشاريع الإنشائية والمعمارية باستخدام أحدث التقنيات',
     heroButton1: 'استكشف خدماتنا',
     heroButton2: 'تواصل معنا',
     
@@ -26,7 +26,7 @@ export const translations = {
     
     // Services
     webDevelopment: 'تطوير التطبيقات',
-    webDevelopmentDesc: 'تطوير تطبيقات ويب متقدمة ومتجاوبة',
+    webDevelopmentDesc: 'تطوير تطبيقات ويب وجوال متقدمة ومتجاوبة',
     aiSolutions: 'الذكاء الاصطناعي',
     aiSolutionsDesc: 'حلول الذكاء الاصطناعي وتعلم الآلة',
     cloudSolutions: 'الحلول السحابية',
@@ -48,7 +48,7 @@ export const translations = {
     
     // Projects Section  
     projectsTitle: 'إنجازات تقنية رائدة',
-    projectsDescription: 'مجموعة مختارة من المشاريع التقنية المتطورة التي طورناها لتحسين كفاءة العمل وتطوير العمليات',
+    projectsDescription: 'مجموعة مختارة من المشاريع التقنية المتطورة التي طورناها',
     featuredProjects: 'مشاريعنا المميزة',
     keyFeatures: 'الميزات الرئيسية',
     technologiesUsed: 'التقنيات المستخدمة',
@@ -60,7 +60,7 @@ export const translations = {
     
     // Contact Section
     contactTitle: 'ابدأ رحلتك التقنية',
-    contactDescription: 'هل لديك مشروع تقني في ذهنك؟ تواصل مع فريقنا المتخصص لمناقشة أفكارك وتحويلها إلى واقع رقمي متطور',
+    contactDescription: 'هل لديك مشروع تقني في ذهنك؟ تواصل مع فريقنا المتخصص لمناقشة أفكارك',
     contactInfo: 'معلومات التواصل',
     sendMessage: 'أرسل لنا رسالة',
     fullName: 'الاسم الكامل',
@@ -75,22 +75,22 @@ export const translations = {
     downloadProfile: 'تحميل نبذة الشركة',
     
     // Footer
-    footerDescription: 'نطور الحلول التقنية المبتكرة لشركة العزب والمشاريع الإنشائية والمعمارية، باستخدام أحدث التقنيات لضمان أفضل النتائج.',
+    footerDescription: 'نطور الحلول التقنية المبتكرة باستخدام أحدث التقنيات لضمان أفضل النتائج.',
     quickLinks: 'روابط سريعة',
     resources: 'الموارد والدعم',
     followUs: 'تابعنا',
     newsletter: 'اشترك في نشرتنا التقنية',
-    newsletterDesc: 'احصل على آخر المستجدات التقنية والنصائح البرمجية والإعلان عن مشاريعنا الجديدة',
+    newsletterDesc: 'احصل على آخر المستجدات التقنية والنصائح البرمجية',
     subscribe: 'اشتراك',
-    copyright: '© 2024 شركة العزب - فريق تكنولوجيا المعلومات. جميع الحقوق محفوظة.',
+    copyright: '© 2024 alazab.dev - جميع الحقوق محفوظة.',
     
     // Toast Messages
     formError: 'خطأ في النموذج',
     fillRequired: 'يرجى ملء جميع الحقول المطلوبة',
     messageSent: 'تم إرسال الرسالة بنجاح! ✨',
-    messageResponse: 'سنتواصل معك خلال 24 ساعة كحد أقصى',
+    messageResponse: 'سنتواصل معك خلال 24 ساعة',
     sendError: 'فشل في الإرسال',
-    sendErrorDesc: 'حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى',
+    sendErrorDesc: 'حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى',
     
     // Additional translations
     advancedTech: 'تقنية متطورة',
@@ -98,12 +98,12 @@ export const translations = {
     
     // 404 Page
     pageNotFound: 'الصفحة غير موجودة',
-    pageNotFoundDesc: 'عذراً، لا يمكننا العثور على الصفحة التي تبحث عنها. ربما تم نقلها أو حذفها أو أن الرابط غير صحيح.',
+    pageNotFoundDesc: 'عذراً، لا يمكننا العثور على الصفحة التي تبحث عنها.',
     quickSearch: 'بحث سريع',
     backToHome: 'العودة للرئيسية',
     goBack: 'العودة للخلف',
     needHelp: 'هل تحتاج مساعدة؟',
-    needHelpDesc: 'إذا كنت تعتقد أن هذا خطأ، يرجى التواصل مع فريق الدعم التقني'
+    needHelpDesc: 'إذا كنت تعتقد أن هذا خطأ، يرجى التواصل مع فريق الدعم'
   },
   
   en: {
@@ -117,13 +117,13 @@ export const translations = {
     startProject: 'Start Project',
     
     // Company Info
-    companyName: 'Alazab Tech',
-    companySubtitle: 'Information Technology Team',
+    companyName: 'alazab.dev',
+    companySubtitle: 'Advanced Tech Solutions',
     
     // Hero Section
-    heroTitle: 'Building the Technical Future',
-    heroSubtitle: 'For Construction & Architectural Projects',
-    heroDescription: 'A specialized IT team providing innovative and advanced technical solutions for Alazab Company in construction and architectural services',
+    heroTitle: 'Building the Digital Future',
+    heroSubtitle: 'with Innovative Solutions',
+    heroDescription: 'A specialized IT team providing innovative and advanced technical solutions for construction and architectural projects using cutting-edge technologies',
     heroButton1: 'Explore Services',
     heroButton2: 'Contact Us',
     
@@ -132,8 +132,8 @@ export const translations = {
     servicesDescription: 'We provide a comprehensive range of technical solutions specifically designed to meet the needs of construction and architectural projects',
     
     // Services
-    webDevelopment: 'Application Development',
-    webDevelopmentDesc: 'Advanced and responsive web application development',
+    webDevelopment: 'App Development',
+    webDevelopmentDesc: 'Advanced and responsive web & mobile apps',
     aiSolutions: 'Artificial Intelligence',
     aiSolutionsDesc: 'AI and machine learning solutions',
     cloudSolutions: 'Cloud Solutions',
@@ -143,7 +143,7 @@ export const translations = {
     dataAnalytics: 'Data Analytics',
     dataAnalyticsDesc: 'Extract insights from big data',
     systemIntegration: 'System Integration',
-    systemIntegrationDesc: 'Connect and integrate different systems',
+    systemIntegrationDesc: 'Connect and integrate systems',
     
     // Team Section
     teamTitle: 'Expert Team',
@@ -155,7 +155,7 @@ export const translations = {
     
     // Projects Section
     projectsTitle: 'Leading Technical Achievements',
-    projectsDescription: 'A curated selection of advanced technical projects we developed to improve work efficiency and operational processes',
+    projectsDescription: 'A curated selection of advanced technical projects we developed',
     featuredProjects: 'Featured Projects',
     keyFeatures: 'Key Features',
     technologiesUsed: 'Technologies Used',
@@ -167,7 +167,7 @@ export const translations = {
     
     // Contact Section
     contactTitle: 'Start Your Technical Journey',
-    contactDescription: 'Have a technical project in mind? Contact our specialized team to discuss your ideas and turn them into advanced digital reality',
+    contactDescription: 'Have a technical project in mind? Contact our specialized team to discuss your ideas',
     contactInfo: 'Contact Information',
     sendMessage: 'Send Us a Message',
     fullName: 'Full Name',
@@ -182,22 +182,22 @@ export const translations = {
     downloadProfile: 'Download Company Profile',
     
     // Footer
-    footerDescription: 'We develop innovative technical solutions for Alazab Company and construction and architectural projects, using the latest technologies to ensure the best results.',
+    footerDescription: 'We develop innovative technical solutions using the latest technologies to ensure the best results.',
     quickLinks: 'Quick Links',
     resources: 'Resources & Support',
     followUs: 'Follow Us',
-    newsletter: 'Subscribe to Our Tech Newsletter',
-    newsletterDesc: 'Get the latest tech updates, programming tips, and announcements about our new projects',
+    newsletter: 'Subscribe to Our Newsletter',
+    newsletterDesc: 'Get the latest tech updates and programming tips',
     subscribe: 'Subscribe',
-    copyright: '© 2024 Alazab Company - Information Technology Team. All rights reserved.',
+    copyright: '© 2024 alazab.dev - All rights reserved.',
     
     // Toast Messages
     formError: 'Form Error',
     fillRequired: 'Please fill all required fields',
     messageSent: 'Message sent successfully! ✨',
-    messageResponse: 'We will contact you within 24 hours maximum',
+    messageResponse: 'We will contact you within 24 hours',
     sendError: 'Send Failed',
-    sendErrorDesc: 'An error occurred while sending the message, please try again',
+    sendErrorDesc: 'An error occurred, please try again',
     
     // Additional translations
     advancedTech: 'Advanced Tech',
@@ -205,11 +205,11 @@ export const translations = {
     
     // 404 Page
     pageNotFound: 'Page Not Found',
-    pageNotFoundDesc: 'Sorry, we cannot find the page you are looking for. It may have been moved, deleted, or the link is incorrect.',
+    pageNotFoundDesc: 'Sorry, we cannot find the page you are looking for.',
     quickSearch: 'Quick Search',
     backToHome: 'Back to Home',
     goBack: 'Go Back',
     needHelp: 'Need Help?',
-    needHelpDesc: 'If you think this is an error, please contact our technical support team'
+    needHelpDesc: 'If you think this is an error, please contact support'
   }
 };

@@ -5,19 +5,22 @@ import TeamSection from '@/components/TeamSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import LanguageDemo from '@/components/LanguageDemo';
 import { useEffect } from 'react';
 import { defaultSEO, updatePageTitle, updateMetaDescription, addStructuredData, organizationStructuredData } from '@/lib/seo';
 
 const Index = () => {
-  // تحسين SEO
+  // SEO
   useEffect(() => {
-    updatePageTitle(defaultSEO.title);
-    updateMetaDescription(defaultSEO.description);
-    addStructuredData(organizationStructuredData);
+    updatePageTitle('alazab.dev - حلول تقنية متطورة | Advanced Tech Solutions');
+    updateMetaDescription('فريق متخصص في تكنولوجيا المعلومات يقدم حلول تقنية مبتكرة ومتطورة');
+    addStructuredData({
+      ...organizationStructuredData,
+      name: 'alazab.dev',
+      url: 'https://alazab.dev'
+    });
   }, []);
 
-  // تحسين التنقل السلس
+  // Smooth scrolling
   useEffect(() => {
     const handleSmoothScroll = (e: Event) => {
       const target = e.target as HTMLAnchorElement;
@@ -25,7 +28,7 @@ const Index = () => {
         e.preventDefault();
         const element = document.querySelector(target.hash);
         if (element) {
-          const headerHeight = 64; // ارتفاع الشريط العلوي
+          const headerHeight = 80;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
@@ -37,13 +40,11 @@ const Index = () => {
       }
     };
 
-    // إضافة مستمع الأحداث لجميع الروابط
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach(link => {
       link.addEventListener('click', handleSmoothScroll);
     });
 
-    // تنظيف المستمعات عند إلغاء تحميل المكون
     return () => {
       links.forEach(link => {
         link.removeEventListener('click', handleSmoothScroll);
@@ -56,7 +57,6 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <LanguageDemo />
         <ServicesSection />
         <TeamSection />
         <ProjectsSection />
