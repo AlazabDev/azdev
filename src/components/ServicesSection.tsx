@@ -78,17 +78,19 @@ const ServicesSection = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-muted/30" />
       <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-10" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 mb-6 animate-fade-in">
-            <Sparkles className="w-4 h-4 text-primary" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 mb-6 animate-fade-in hover:scale-105 transition-transform duration-300 cursor-default">
+            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
             <span className="text-sm font-medium text-foreground">{t('services')}</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in delay-100">
-            <span className="text-gradient">{t('servicesTitle')}</span>
+            <span className="text-gradient animate-gradient bg-[length:200%_auto]">{t('servicesTitle')}</span>
           </h2>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in delay-200">
@@ -103,21 +105,21 @@ const ServicesSection = () => {
             return (
               <Card 
                 key={index} 
-                className="feature-card group animate-fade-in"
+                className="feature-card group animate-fade-in hover:scale-[1.02] hover:-translate-y-3 transition-all duration-500 cursor-pointer"
                 style={{ animationDelay: `${(index + 3) * 100}ms` }}
               >
                 {/* Icon */}
-                <div className={`w-14 h-14 ${service.iconBg} rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110`}>
-                  <Icon className={`w-7 h-7 ${service.iconColor}`} />
+                <div className={`w-14 h-14 ${service.iconBg} rounded-2xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg`}>
+                  <Icon className={`w-7 h-7 ${service.iconColor} transition-transform duration-300 group-hover:scale-110`} />
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
                   {service.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-muted-foreground mb-5 leading-relaxed">
+                <p className="text-muted-foreground mb-5 leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
                   {service.description}
                 </p>
                 
@@ -126,16 +128,17 @@ const ServicesSection = () => {
                   {service.features.map((feature, featureIndex) => (
                     <li 
                       key={featureIndex} 
-                      className={`text-sm text-muted-foreground flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}
+                      className={`text-sm text-muted-foreground flex items-center gap-2 transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1 ${isRTL ? 'flex-row-reverse group-hover:-translate-x-1' : ''}`}
+                      style={{ transitionDelay: `${featureIndex * 50}ms` }}
                     >
-                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.gradient}`} />
+                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.gradient} transition-transform duration-300 group-hover:scale-150`} />
                       {feature}
                     </li>
                   ))}
                 </ul>
 
                 {/* Hover Glow */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
               </Card>
             );
           })}
@@ -145,13 +148,13 @@ const ServicesSection = () => {
         <div className="text-center animate-fade-in delay-700">
           <Button 
             size="lg" 
-            className="group bg-gradient-primary text-white shadow-glow hover:shadow-glow-lg transition-all duration-300"
+            className="group bg-gradient-primary text-white shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300"
           >
             {t('exploreAllProjects')}
             {isRTL ? (
-              <ArrowLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" />
+              <ArrowLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-2" />
             ) : (
-              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
             )}
           </Button>
         </div>

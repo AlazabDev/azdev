@@ -26,29 +26,29 @@ const HeroSection = () => {
         {/* Animated Gradient Orbs */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-float delay-700" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl animate-pulse" />
       </div>
 
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Floating Cards */}
-        <div className="absolute top-32 left-[10%] glass rounded-xl p-3 animate-float hidden lg:block">
+        <div className="absolute top-32 left-[10%] glass rounded-xl p-3 animate-float hidden lg:block hover:scale-110 transition-transform duration-300">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center animate-pulse">
               <Code2 className="w-4 h-4 text-white" />
             </div>
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Development</span>
               <div className="h-1.5 w-16 bg-muted rounded-full overflow-hidden">
-                <div className="h-full w-3/4 bg-gradient-primary rounded-full" />
+                <div className="h-full w-3/4 bg-gradient-primary rounded-full animate-pulse" />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="absolute top-40 right-[10%] glass rounded-xl p-3 animate-float delay-300 hidden lg:block">
+        <div className="absolute top-40 right-[10%] glass rounded-xl p-3 animate-float delay-300 hidden lg:block hover:scale-110 transition-transform duration-300">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center animate-pulse">
               <Zap className="w-4 h-4 text-white" />
             </div>
             <div className="flex flex-col">
@@ -60,7 +60,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-40 left-[15%] glass rounded-xl p-3 animate-float delay-500 hidden lg:block">
+        <div className="absolute bottom-40 left-[15%] glass rounded-xl p-3 animate-float delay-500 hidden lg:block hover:scale-110 transition-transform duration-300">
           <div className="flex items-center gap-2">
             <div className="live-indicator">
               <span>LIVE</span>
@@ -69,7 +69,8 @@ const HeroSection = () => {
               {[1, 2, 3, 4].map((i) => (
                 <div 
                   key={i}
-                  className="w-6 h-6 rounded-full bg-gradient-primary border-2 border-background"
+                  className="w-6 h-6 rounded-full bg-gradient-primary border-2 border-background animate-pulse"
+                  style={{ animationDelay: `${i * 200}ms` }}
                 />
               ))}
             </div>
@@ -77,9 +78,9 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-32 right-[15%] glass rounded-xl p-3 animate-float delay-200 hidden lg:block">
+        <div className="absolute bottom-32 right-[15%] glass rounded-xl p-3 animate-float delay-200 hidden lg:block hover:scale-110 transition-transform duration-300">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center animate-bounce-subtle">
               <Users className="w-4 h-4 text-white" />
             </div>
             <div className="flex flex-col">
@@ -93,18 +94,18 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 mb-8 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 mb-8 animate-fade-in hover:scale-105 hover:border-primary/50 transition-all duration-300 cursor-default">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
             <span className="text-sm font-medium text-foreground">{t('companySubtitle')}</span>
-            <Sparkles className="w-4 h-4 text-primary" />
+            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
           </div>
 
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in delay-100">
-            <span className="text-gradient">{t('heroTitle')}</span>
+            <span className="text-gradient animate-gradient bg-[length:200%_auto]">{t('heroTitle')}</span>
             <br />
             <span className="text-foreground">{t('heroSubtitle')}</span>
           </h1>
@@ -118,14 +119,14 @@ const HeroSection = () => {
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in delay-300 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
             <Button 
               size="lg" 
-              className="group bg-gradient-primary text-white shadow-glow hover:shadow-glow-lg transition-all duration-300 px-8"
+              className="group bg-gradient-primary text-white shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300 px-8"
             >
-              <Rocket className={`w-5 h-5 transition-transform group-hover:scale-110 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+              <Rocket className={`w-5 h-5 transition-transform group-hover:scale-125 group-hover:rotate-12 ${isRTL ? 'ml-2' : 'mr-2'}`} />
               {t('heroButton1')}
               {isRTL ? (
-                <ArrowLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" />
+                <ArrowLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-2" />
               ) : (
-                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
               )}
             </Button>
             
@@ -134,9 +135,9 @@ const HeroSection = () => {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="group border-2 hover:bg-primary/5 transition-all duration-300 px-8"
+                  className="group border-2 hover:bg-primary/10 hover:border-primary hover:scale-105 transition-all duration-300 px-8"
                 >
-                  <Play className={`w-5 h-5 transition-transform group-hover:scale-110 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                  <Play className={`w-5 h-5 transition-transform group-hover:scale-125 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                   {t('heroButton2')}
                 </Button>
               }
@@ -150,13 +151,13 @@ const HeroSection = () => {
             {stats.map((stat, index) => (
               <div 
                 key={index}
-                className="stats-card group"
+                className="stats-card group hover:scale-105 hover:-translate-y-2 transition-all duration-300 cursor-default"
               >
-                <stat.icon className="w-6 h-6 text-primary mx-auto mb-3 transition-transform group-hover:scale-110" />
-                <div className="text-3xl md:text-4xl font-bold text-gradient mb-1">
+                <stat.icon className="w-6 h-6 text-primary mx-auto mb-3 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" />
+                <div className="text-3xl md:text-4xl font-bold text-gradient mb-1 group-hover:animate-pulse">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                   {stat.label}
                 </div>
               </div>
