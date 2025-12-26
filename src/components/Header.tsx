@@ -1,25 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import ContactModal from './ContactModal';
 import LanguageToggle from './LanguageToggle';
+import { ThemeToggle } from './ThemeToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Menu, X, Code, Zap, Shield, ExternalLink, Globe } from 'lucide-react';
+import { Menu, X, Code2, Zap, ChevronDown, Sparkles } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { toast } = useToast();
-  const { t, language, setLanguage, isRTL } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleDashboardClick = () => {
     toast({
       title: t('dashboard') + " " + (language === 'ar' ? 'قريباً!' : 'Coming Soon!'),
       description: language === 'ar' ? 'نعمل على تطوير لوحة تحكم متقدمة لعملائنا' : 'We are working on developing an advanced dashboard for our clients',
     });
-  };
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'ar' ? 'en' : 'ar');
   };
 
   const navigation = [
@@ -31,103 +37,135 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'py-2 glass border-b border-border/50' 
+          : 'py-4 bg-transparent'
+      }`}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* الشعار */}
-          <div className={`flex items-center space-x-4 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
-            <div className={`flex items-center space-x-2 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Code className="w-6 h-6 text-primary-foreground" />
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <a 
+            href="#home" 
+            className={`flex items-center gap-3 group ${isRTL ? 'flex-row-reverse' : ''}`}
+          >
+            <div className="relative">
+              <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow transition-transform duration-300 group-hover:scale-110">
+                <Code2 className="w-5 h-5 text-white" />
               </div>
-              <div className={isRTL ? "text-right" : "text-left"}>
-                <div className="font-bold text-lg text-foreground">{t('companyName')}</div>
-                <div className="text-sm text-muted-foreground">{t('companySubtitle')}</div>
-              </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-secondary rounded-full animate-pulse" />
             </div>
-          </div>
+            <div className={isRTL ? "text-right" : "text-left"}>
+              <div className="font-bold text-lg text-foreground tracking-tight">
+                alazab<span className="text-primary">.dev</span>
+              </div>
+              <div className="text-xs text-muted-foreground">{t('companySubtitle')}</div>
+            </div>
+          </a>
 
-          {/* القائمة - سطح المكتب */}
-          <nav className={`hidden md:flex items-center space-x-8 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
+          {/* Desktop Navigation */}
+          <nav className={`hidden lg:flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`}>
             {navigation.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                className="nav-link"
               >
                 {item.name}
               </a>
             ))}
           </nav>
 
-          {/* أزرار الإجراءات */}
-          <div className={`hidden md:flex items-center space-x-4 ${isRTL ? 'rtl:space-x-reverse' : ''}`}>
-            {/* زر تغيير اللغة */}
+          {/* Actions */}
+          <div className={`hidden lg:flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <ThemeToggle />
             <LanguageToggle />
             
-            <Button variant="outline" size="sm" onClick={handleDashboardClick}>
-              <Shield className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
-              {t('dashboard')}
-            </Button>
             <ContactModal 
               trigger={
-                <Button size="sm" className="bg-gradient-tech hover:opacity-90">
-                  <Zap className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                <Button 
+                  size="sm" 
+                  className="bg-gradient-primary text-white hover:opacity-90 shadow-glow transition-all duration-300 hover:shadow-glow-lg"
+                >
+                  <Sparkles className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                   {t('startProject')}
                 </Button>
               }
               title={t('startProject')}
-              description={language === 'ar' ? 'احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول' : 'Book a free consultation to discuss your project and determine the best solutions'}
+              description={language === 'ar' ? 'احجز استشارة مجانية لمناقشة مشروعك' : 'Book a free consultation to discuss your project'}
             />
           </div>
 
-          {/* زر القائمة للجوال */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="relative"
+            >
+              <div className="relative w-6 h-6 flex items-center justify-center">
+                <span 
+                  className={`absolute h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                    isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+                  }`} 
+                />
+                <span 
+                  className={`absolute h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                    isMenuOpen ? 'opacity-0' : 'opacity-100'
+                  }`} 
+                />
+                <span 
+                  className={`absolute h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                    isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+                  }`} 
+                />
+              </div>
+            </Button>
+          </div>
         </div>
 
-        {/* القائمة المنسدلة للجوال */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
-            <nav className="flex flex-col space-y-4">
+        {/* Mobile Menu */}
+        <div 
+          className={`lg:hidden overflow-hidden transition-all duration-500 ${
+            isMenuOpen ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="glass rounded-2xl p-4 border border-border/50">
+            <nav className="flex flex-col gap-2">
               {navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-foreground hover:text-primary transition-colors duration-300 font-medium px-2 py-1"
+                  className="px-4 py-3 rounded-xl hover:bg-primary/10 transition-colors text-foreground font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </a>
               ))}
-              <div className="flex flex-col space-y-2 pt-4 border-t border-border">
-                {/* زر تغيير اللغة للجوال */}
-                <LanguageToggle variant="outline" size="sm" />
-                
-                <Button variant="outline" size="sm" onClick={handleDashboardClick}>
-                  <Shield className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
-                  {t('dashboard')}
-                </Button>
-                <ContactModal 
-                  trigger={
-                    <Button size="sm" className="bg-gradient-tech hover:opacity-90 w-full">
-                      <Zap className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
-                      {t('startProject')}
-                    </Button>
-                  }
-                  title={t('startProject')}
-                  description={language === 'ar' ? 'احجز استشارة مجانية لمناقشة مشروعك وتحديد أفضل الحلول' : 'Book a free consultation to discuss your project and determine the best solutions'}
-                />
-              </div>
             </nav>
+            
+            <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border/50">
+              <LanguageToggle variant="outline" size="sm" />
+              
+              <ContactModal 
+                trigger={
+                  <Button 
+                    className="w-full bg-gradient-primary text-white hover:opacity-90"
+                  >
+                    <Sparkles className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                    {t('startProject')}
+                  </Button>
+                }
+                title={t('startProject')}
+                description={language === 'ar' ? 'احجز استشارة مجانية لمناقشة مشروعك' : 'Book a free consultation to discuss your project'}
+              />
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
