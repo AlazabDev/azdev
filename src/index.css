@@ -5,6 +5,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* RTL/LTR Support */
+html.rtl {
+  direction: rtl;
+}
+
+html.ltr {
+  direction: ltr;
+}
+
+html.rtl .rtl\:text-right {
+  text-align: right;
+}
+
+html.rtl .rtl\:flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+html.rtl .rtl\:space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+html.rtl .rtl\:ml-auto {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+html.rtl .rtl\:mr-auto {
+  margin-right: auto;
+  margin-left: 0;
+}
+
 /* alazab.dev Design System - Inspired by ExamAI */
 
 @layer base {
