@@ -559,6 +559,103 @@ export type Database = {
         }
         Relationships: []
       }
+      consultation_bookings: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string | null
+          phone: string
+          preferred_date: string
+          preferred_time: string
+          service_type: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message?: string | null
+          phone: string
+          preferred_date: string
+          preferred_time: string
+          service_type: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string | null
+          phone?: string
+          preferred_date?: string
+          preferred_time?: string
+          service_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      daftra_sync_logs: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          id: string
+          maintenance_request_id: string | null
+          request_payload: Json | null
+          response_payload: Json | null
+          status: string
+          sync_type: string
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          maintenance_request_id?: string | null
+          request_payload?: Json | null
+          response_payload?: Json | null
+          status: string
+          sync_type: string
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          maintenance_request_id?: string | null
+          request_payload?: Json | null
+          response_payload?: Json | null
+          status?: string
+          sync_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daftra_sync_logs_maintenance_request_id_fkey"
+            columns: ["maintenance_request_id"]
+            isOneToOne: false
+            referencedRelation: "maintenance_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "daftra_sync_logs_maintenance_request_id_fkey"
+            columns: ["maintenance_request_id"]
+            isOneToOne: false
+            referencedRelation: "technician_assigned_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "daftra_sync_logs_maintenance_request_id_fkey"
+            columns: ["maintenance_request_id"]
+            isOneToOne: false
+            referencedRelation: "vw_maintenance_requests_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       districts: {
         Row: {
           city_id: number
@@ -841,6 +938,7 @@ export type Database = {
           file_url: string | null
           html_url: string | null
           id: string
+          magicplan_gallery_url: string | null
           number: string
           payment_status: string
           pdf_url: string | null
@@ -871,6 +969,7 @@ export type Database = {
           file_url?: string | null
           html_url?: string | null
           id?: string
+          magicplan_gallery_url?: string | null
           number: string
           payment_status?: string
           pdf_url?: string | null
@@ -901,6 +1000,7 @@ export type Database = {
           file_url?: string | null
           html_url?: string | null
           id?: string
+          magicplan_gallery_url?: string | null
           number?: string
           payment_status?: string
           pdf_url?: string | null
@@ -1160,6 +1260,13 @@ export type Database = {
             referencedRelation: "invoices"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "invoice_items_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices_safe"
+            referencedColumns: ["id"]
+          },
         ]
       }
       invoices: {
@@ -1245,6 +1352,9 @@ export type Database = {
           created_at: string
           created_by: string | null
           customer_notes: string | null
+          daftra_invoice_id: string | null
+          daftra_sync_status: string | null
+          daftra_synced_at: string | null
           description: string | null
           estimated_cost: number | null
           id: string
@@ -1286,6 +1396,9 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           customer_notes?: string | null
+          daftra_invoice_id?: string | null
+          daftra_sync_status?: string | null
+          daftra_synced_at?: string | null
           description?: string | null
           estimated_cost?: number | null
           id?: string
@@ -1327,6 +1440,9 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           customer_notes?: string | null
+          daftra_invoice_id?: string | null
+          daftra_sync_status?: string | null
+          daftra_synced_at?: string | null
           description?: string | null
           estimated_cost?: number | null
           id?: string
@@ -1452,6 +1568,129 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      media_files: {
+        Row: {
+          created_at: string | null
+          direction: string | null
+          file_size: number | null
+          file_type: string | null
+          filename: string | null
+          from_phone: string | null
+          id: number
+          media_id: string
+          message_id: string
+          meta_url: string | null
+          mime_type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          direction?: string | null
+          file_size?: number | null
+          file_type?: string | null
+          filename?: string | null
+          from_phone?: string | null
+          id?: number
+          media_id: string
+          message_id: string
+          meta_url?: string | null
+          mime_type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          direction?: string | null
+          file_size?: number | null
+          file_type?: string | null
+          filename?: string | null
+          from_phone?: string | null
+          id?: number
+          media_id?: string
+          message_id?: string
+          meta_url?: string | null
+          mime_type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      media_processing_errors: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          error_stack: string | null
+          error_type: string | null
+          file_type: string | null
+          from_phone: string | null
+          id: string
+          media_id: string | null
+          message_id: string | null
+          occurred_at: string | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          error_stack?: string | null
+          error_type?: string | null
+          file_type?: string | null
+          from_phone?: string | null
+          id?: string
+          media_id?: string | null
+          message_id?: string | null
+          occurred_at?: string | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          error_stack?: string | null
+          error_type?: string | null
+          file_type?: string | null
+          from_phone?: string | null
+          id?: string
+          media_id?: string | null
+          message_id?: string | null
+          occurred_at?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      media_stats_daily: {
+        Row: {
+          by_type: Json | null
+          created_at: string | null
+          date: string
+          id: string
+          inbound_count: number | null
+          outbound_count: number | null
+          total_files: number | null
+          total_size: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          by_type?: Json | null
+          created_at?: string | null
+          date: string
+          id?: string
+          inbound_count?: number | null
+          outbound_count?: number | null
+          total_files?: number | null
+          total_size?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          by_type?: Json | null
+          created_at?: string | null
+          date?: string
+          id?: string
+          inbound_count?: number | null
+          outbound_count?: number | null
+          total_files?: number | null
+          total_size?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       message_logs: {
         Row: {
@@ -1756,6 +1995,42 @@ export type Database = {
         }
         Relationships: []
       }
+      pending_technician_registrations: {
+        Row: {
+          company_name: string
+          company_type: string
+          created_at: string | null
+          email: string
+          expires_at: string | null
+          full_name: string
+          id: string
+          phone: string
+          profile_data: Json | null
+        }
+        Insert: {
+          company_name: string
+          company_type: string
+          created_at?: string | null
+          email: string
+          expires_at?: string | null
+          full_name: string
+          id?: string
+          phone: string
+          profile_data?: Json | null
+        }
+        Update: {
+          company_name?: string
+          company_type?: string
+          created_at?: string | null
+          email?: string
+          expires_at?: string | null
+          full_name?: string
+          id?: string
+          phone?: string
+          profile_data?: Json | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -1841,6 +2116,68 @@ export type Database = {
             columns: ["company_id"]
             isOneToOne: false
             referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_images: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number | null
+          document_id: string | null
+          file_name: string
+          file_path: string
+          file_size: number | null
+          folder_name: string
+          id: string
+          is_featured: boolean | null
+          mime_type: string | null
+          project_id: string | null
+          title: string | null
+          updated_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          document_id?: string | null
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          folder_name: string
+          id?: string
+          is_featured?: boolean | null
+          mime_type?: string | null
+          project_id?: string | null
+          title?: string | null
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          document_id?: string | null
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          folder_name?: string
+          id?: string
+          is_featured?: boolean | null
+          mime_type?: string | null
+          project_id?: string | null
+          title?: string | null
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_images_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
             referencedColumns: ["id"]
           },
         ]
@@ -2075,6 +2412,68 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      quote_items: {
+        Row: {
+          approval_status: string | null
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          daftra_item_id: string | null
+          document_id: string
+          id: string
+          notes: string | null
+          product_description: string | null
+          product_name: string
+          quantity: number | null
+          rejection_reason: string | null
+          total_price: number | null
+          unit_price: number | null
+          updated_at: string
+        }
+        Insert: {
+          approval_status?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          daftra_item_id?: string | null
+          document_id: string
+          id?: string
+          notes?: string | null
+          product_description?: string | null
+          product_name: string
+          quantity?: number | null
+          rejection_reason?: string | null
+          total_price?: number | null
+          unit_price?: number | null
+          updated_at?: string
+        }
+        Update: {
+          approval_status?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          daftra_item_id?: string | null
+          document_id?: string
+          id?: string
+          notes?: string | null
+          product_description?: string | null
+          product_name?: string
+          quantity?: number | null
+          rejection_reason?: string | null
+          total_price?: number | null
+          unit_price?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quote_items_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       request_approvals: {
         Row: {
@@ -2564,6 +2963,13 @@ export type Database = {
             foreignKeyName: "technician_agreements_technician_id_fkey"
             columns: ["technician_id"]
             isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_agreements_technician_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
             referencedRelation: "technician_profiles_safe"
             referencedColumns: ["id"]
           },
@@ -2765,6 +3171,13 @@ export type Database = {
             foreignKeyName: "technician_coverage_areas_profile_id_fkey"
             columns: ["technician_id"]
             isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_coverage_areas_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
             referencedRelation: "technician_profiles_safe"
             referencedColumns: ["id"]
           },
@@ -2773,6 +3186,13 @@ export type Database = {
             columns: ["technician_id"]
             isOneToOne: false
             referencedRelation: "technician_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_coverage_areas_technician_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
             referencedColumns: ["id"]
           },
           {
@@ -2900,6 +3320,13 @@ export type Database = {
             foreignKeyName: "technician_documents_profile_id_fkey"
             columns: ["technician_id"]
             isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_documents_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
             referencedRelation: "technician_profiles_safe"
             referencedColumns: ["id"]
           },
@@ -2908,6 +3335,13 @@ export type Database = {
             columns: ["technician_id"]
             isOneToOne: false
             referencedRelation: "technician_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_documents_technician_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
             referencedColumns: ["id"]
           },
           {
@@ -3425,6 +3859,13 @@ export type Database = {
             foreignKeyName: "technician_service_prices_profile_id_fkey"
             columns: ["technician_id"]
             isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_service_prices_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
             referencedRelation: "technician_profiles_safe"
             referencedColumns: ["id"]
           },
@@ -3440,6 +3881,13 @@ export type Database = {
             columns: ["technician_id"]
             isOneToOne: false
             referencedRelation: "technician_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_service_prices_technician_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
             referencedColumns: ["id"]
           },
           {
@@ -3790,6 +4238,13 @@ export type Database = {
             foreignKeyName: "technician_trades_profile_id_fkey"
             columns: ["technician_id"]
             isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_trades_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
             referencedRelation: "technician_profiles_safe"
             referencedColumns: ["id"]
           },
@@ -3798,6 +4253,13 @@ export type Database = {
             columns: ["technician_id"]
             isOneToOne: false
             referencedRelation: "technician_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_trades_technician_profile_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
             referencedColumns: ["id"]
           },
           {
@@ -4004,6 +4466,13 @@ export type Database = {
             columns: ["technician_id"]
             isOneToOne: false
             referencedRelation: "technician_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_verifications_technician_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
             referencedColumns: ["id"]
           },
           {
@@ -4365,6 +4834,13 @@ export type Database = {
             foreignKeyName: "technicians_technician_profile_id_fkey"
             columns: ["technician_profile_id"]
             isOneToOne: false
+            referencedRelation: "technician_profiles_public_safe"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technicians_technician_profile_id_fkey"
+            columns: ["technician_profile_id"]
+            isOneToOne: false
             referencedRelation: "technician_profiles_safe"
             referencedColumns: ["id"]
           },
@@ -4502,6 +4978,75 @@ export type Database = {
           unit_rate?: number | null
           updated_at?: string
           version?: number
+        }
+        Relationships: []
+      }
+      whatsapp_media_storage: {
+        Row: {
+          caption: string | null
+          created_at: string | null
+          direction: string | null
+          file_size: number | null
+          file_type: string
+          from_phone: string
+          id: string
+          media_id: string
+          message_id: string | null
+          metadata: Json | null
+          mime_type: string | null
+          original_filename: string | null
+          processed_at: string | null
+          s3_bucket: string | null
+          s3_key: string
+          s3_url: string | null
+          sha256_hash: string | null
+          status: string | null
+          updated_at: string | null
+          whatsapp_url: string | null
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string | null
+          direction?: string | null
+          file_size?: number | null
+          file_type: string
+          from_phone: string
+          id?: string
+          media_id: string
+          message_id?: string | null
+          metadata?: Json | null
+          mime_type?: string | null
+          original_filename?: string | null
+          processed_at?: string | null
+          s3_bucket?: string | null
+          s3_key: string
+          s3_url?: string | null
+          sha256_hash?: string | null
+          status?: string | null
+          updated_at?: string | null
+          whatsapp_url?: string | null
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string | null
+          direction?: string | null
+          file_size?: number | null
+          file_type?: string
+          from_phone?: string
+          id?: string
+          media_id?: string
+          message_id?: string | null
+          metadata?: Json | null
+          mime_type?: string | null
+          original_filename?: string | null
+          processed_at?: string | null
+          s3_bucket?: string | null
+          s3_key?: string
+          s3_url?: string | null
+          sha256_hash?: string | null
+          status?: string | null
+          updated_at?: string | null
+          whatsapp_url?: string | null
         }
         Relationships: []
       }
@@ -4737,32 +5282,152 @@ export type Database = {
           },
         ]
       }
+      appointments_safe: {
+        Row: {
+          appointment_date: string | null
+          appointment_time: string | null
+          created_at: string | null
+          created_by: string | null
+          customer_email: string | null
+          customer_name: string | null
+          customer_phone: string | null
+          description: string | null
+          duration_minutes: number | null
+          id: string | null
+          location: string | null
+          maintenance_request_id: string | null
+          notes: string | null
+          property_address: string | null
+          property_id: string | null
+          property_name: string | null
+          reminder_sent: boolean | null
+          status: string | null
+          title: string | null
+          updated_at: string | null
+          vendor_id: string | null
+          vendor_name: string | null
+          vendor_specialization: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties_qr_public"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors_public_safe"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      invoices_safe: {
+        Row: {
+          amount: number | null
+          created_at: string | null
+          created_by: string | null
+          currency: string | null
+          customer_email: string | null
+          customer_name: string | null
+          customer_phone: string | null
+          due_date: string | null
+          id: string | null
+          invoice_number: string | null
+          is_locked: boolean | null
+          issue_date: string | null
+          last_modified_by: string | null
+          notes: string | null
+          payment_method: string | null
+          payment_reference: string | null
+          status: string | null
+          updated_at: string | null
+          version: number | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          currency?: string | null
+          customer_email?: string | null
+          customer_name?: string | null
+          customer_phone?: string | null
+          due_date?: string | null
+          id?: string | null
+          invoice_number?: string | null
+          is_locked?: boolean | null
+          issue_date?: string | null
+          last_modified_by?: string | null
+          notes?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
+          status?: string | null
+          updated_at?: string | null
+          version?: number | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          currency?: string | null
+          customer_email?: string | null
+          customer_name?: string | null
+          customer_phone?: string | null
+          due_date?: string | null
+          id?: string | null
+          invoice_number?: string | null
+          is_locked?: boolean | null
+          issue_date?: string | null
+          last_modified_by?: string | null
+          notes?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
+          status?: string | null
+          updated_at?: string | null
+          version?: number | null
+        }
+        Relationships: []
+      }
       profiles_public_safe: {
         Row: {
           avatar_url: string | null
           company_id: string | null
+          created_at: string | null
           full_name: string | null
           id: string | null
-          name: string | null
-          position: string | null
           role: string | null
         }
         Insert: {
           avatar_url?: string | null
           company_id?: string | null
+          created_at?: string | null
           full_name?: string | null
           id?: string | null
-          name?: string | null
-          position?: string | null
           role?: string | null
         }
         Update: {
           avatar_url?: string | null
           company_id?: string | null
+          created_at?: string | null
           full_name?: string | null
           id?: string | null
-          name?: string | null
-          position?: string | null
           role?: string | null
         }
         Relationships: [
@@ -4897,6 +5562,60 @@ export type Database = {
             columns: ["assigned_technician_id"]
             isOneToOne: false
             referencedRelation: "technicians_public_safe"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      technician_profiles_public_safe: {
+        Row: {
+          city_id: number | null
+          company_name: string | null
+          company_type: string | null
+          created_at: string | null
+          district_id: number | null
+          full_name: string | null
+          id: string | null
+          preferred_language: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          city_id?: number | null
+          company_name?: string | null
+          company_type?: string | null
+          created_at?: string | null
+          district_id?: number | null
+          full_name?: string | null
+          id?: string | null
+          preferred_language?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          city_id?: number | null
+          company_name?: string | null
+          company_type?: string | null
+          created_at?: string | null
+          district_id?: number | null
+          full_name?: string | null
+          id?: string | null
+          preferred_language?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "technician_profiles_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "technician_profiles_district_id_fkey"
+            columns: ["district_id"]
+            isOneToOne: false
+            referencedRelation: "districts"
             referencedColumns: ["id"]
           },
         ]
@@ -5324,10 +6043,15 @@ export type Database = {
         Args: { current_stage: string; next_stage: string; user_role: string }
         Returns: boolean
       }
+      complete_technician_registration: {
+        Args: { p_email: string }
+        Returns: Json
+      }
       create_technician_draft: {
         Args: { fullname: string; phone: string }
         Returns: undefined
       }
+      current_user_is_owner: { Args: never; Returns: boolean }
       find_nearest_vendor: {
         Args: {
           request_latitude: number
@@ -5514,7 +6238,9 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
-      is_authorized_owner: { Args: { _user_id: string }; Returns: boolean }
+      is_authorized_owner:
+        | { Args: { _user_id: string }; Returns: boolean }
+        | { Args: { user_email: string }; Returns: boolean }
       is_email_confirmed: { Args: never; Returns: boolean }
       is_owner_email: { Args: never; Returns: boolean }
       is_staff:
@@ -5569,6 +6295,8 @@ export type Database = {
         | "accounting"
         | "engineering"
         | "dispatcher"
+        | "owner"
+        | "finance"
       company_model_enum: "local_provider" | "third_party"
       company_type_enum: "individual" | "small_team" | "company"
       document_type_enum:
@@ -5801,6 +6529,8 @@ export const Constants = {
         "accounting",
         "engineering",
         "dispatcher",
+        "owner",
+        "finance",
       ],
       company_model_enum: ["local_provider", "third_party"],
       company_type_enum: ["individual", "small_team", "company"],

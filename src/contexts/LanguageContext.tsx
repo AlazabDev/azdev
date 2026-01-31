@@ -22,10 +22,17 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
+  const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem('language');
     return (saved as Language) || 'en';
   });
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    // Force re-render of all components by triggering a state update
+    document.documentElement.classList.remove('rtl', 'ltr');
+    document.documentElement.classList.add(lang === 'ar' ? 'rtl' : 'ltr');
+  };
 
   const isRTL = language === 'ar';
 

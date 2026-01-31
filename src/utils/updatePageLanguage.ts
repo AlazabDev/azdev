@@ -5,6 +5,10 @@ export const updatePageLanguage = (language: 'ar' | 'en') => {
   document.documentElement.lang = language;
   document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
   
+  // Update html classes for RTL/LTR styling
+  document.documentElement.classList.remove('rtl', 'ltr');
+  document.documentElement.classList.add(isRTL ? 'rtl' : 'ltr');
+  
   // Update body classes for styling
   document.body.className = document.body.className.replace(/\b(rtl|ltr)\b/g, '');
   document.body.classList.add(isRTL ? 'rtl' : 'ltr');
@@ -14,13 +18,13 @@ export const updatePageLanguage = (language: 'ar' | 'en') => {
   if (metaDesc) {
     const description = language === 'ar' 
       ? 'فريق تكنولوجيا المعلومات في شركة العزب يقدم حلول تقنية مبتكرة للمشاريع الإنشائية والمعمارية. تطوير التطبيقات، الذكاء الاصطناعي، والأمن السيبراني.'
-      : 'Alazab Company IT team provides innovative technical solutions for construction and architectural projects. Application development, artificial intelligence, and cybersecurity.';
+      : 'alazab.dev provides innovative technical solutions for construction and architectural projects. Application development, AI, and cybersecurity.';
     metaDesc.setAttribute('content', description);
   }
   
   // Update page title
   const title = language === 'ar'
-    ? 'العزب تك - فريق تكنولوجيا المعلومات | حلول تقنية متطورة'
-    : 'Alazab Tech - IT Team | Advanced Technical Solutions';
+    ? 'alazab.dev - حلول تقنية متطورة'
+    : 'alazab.dev - Advanced Tech Solutions';
   document.title = title;
 };
