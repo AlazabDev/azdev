@@ -11,6 +11,7 @@ import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import MaintenanceSystem from "./pages/MaintenanceSystem";
 import Contact from "./pages/Contact";
+import Install from "./pages/Install";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="/projects" element={<Projects />} />
               <Route path="/maintenance-system" element={<MaintenanceSystem />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/install" element={<Install />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

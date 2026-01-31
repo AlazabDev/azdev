@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     
     <!-- SEO Meta Tags -->
-    <title>alazab.dev - حلول تقنية متطورة | Development Solutions</title>
-    <meta name="description" content="alazab.dev - فريق تكنولوجيا المعلومات يقدم حلول تقنية مبتكرة للمشاريع الإنشائية والمعمارية. تطوير التطبيقات، الذكاء الاصطناعي، والأمن السيبراني." />
-    <meta name="keywords" content="alazab.dev, تكنولوجيا المعلومات, تطوير التطبيقات, الذكاء الاصطناعي, المشاريع الإنشائية, الحلول التقنية, البرمجة, الأمن السيبراني" />
+    <title>alazab.dev - Advanced Tech Solutions | حلول تقنية متطورة</title>
+    <meta name="description" content="alazab.dev - IT team providing innovative technical solutions for construction and architectural projects. App development, AI, and cybersecurity." />
+    <meta name="keywords" content="alazab.dev, IT solutions, app development, AI, construction projects, technical solutions, programming, cybersecurity" />
     <meta name="author" content="alazab.dev" />
     <meta name="robots" content="index, follow" />
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="alazab.dev - حلول تقنية متطورة" />
-    <meta property="og:description" content="فريق تكنولوجيا المعلومات يقدم حلول تقنية مبتكرة للمشاريع الإنشائية والمعمارية" />
+    <meta property="og:title" content="alazab.dev - Advanced Tech Solutions" />
+    <meta property="og:description" content="IT team providing innovative technical solutions for construction and architectural projects" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alazab.dev" />
     <meta property="og:image" content="https://alazab.dev/og-image.jpg" />
-    <meta property="og:locale" content="ar_SA" />
-    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ar_SA" />
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="alazab.dev - حلول تقنية متطورة" />
-    <meta name="twitter:description" content="فريق تكنولوجيا المعلومات يقدم حلول تقنية مبتكرة للمشاريع الإنشائية والمعمارية" />
+    <meta name="twitter:title" content="alazab.dev - Advanced Tech Solutions" />
+    <meta name="twitter:description" content="IT team providing innovative technical solutions for construction and architectural projects" />
     <meta name="twitter:image" content="https://alazab.dev/og-image.jpg" />
     
     <!-- Theme & PWA -->
-    <meta name="theme-color" content="#7c3aed" />
+    <meta name="theme-color" content="#7c3aed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#8b5cf6" media="(prefers-color-scheme: dark)" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="alazab.dev" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://alazab.dev" />
@@ -38,6 +41,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon002.png" />
     <link rel="apple-touch-icon" href="/alazab-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/alazab-icon.png" />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +49,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   </head>
 
-  <body class="dark">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
