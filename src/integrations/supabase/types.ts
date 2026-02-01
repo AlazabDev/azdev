@@ -14,7 +14,261 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      integrations: {
+        Row: {
+          config: Json | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          project_id: string
+          type: string
+        }
+        Insert: {
+          config?: Json | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          project_id: string
+          type: string
+        }
+        Update: {
+          config?: Json | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          project_id?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      media_files: {
+        Row: {
+          contact_id: string | null
+          created_at: string | null
+          file_size: number | null
+          id: string
+          media_id: string | null
+          message_id: string | null
+          metadata: Json | null
+          mime_type: string | null
+          project_id: string
+          public_url: string | null
+          storage_path: string | null
+          whatsapp_number_id: string
+          workflow_id: string
+        }
+        Insert: {
+          contact_id?: string | null
+          created_at?: string | null
+          file_size?: number | null
+          id?: string
+          media_id?: string | null
+          message_id?: string | null
+          metadata?: Json | null
+          mime_type?: string | null
+          project_id: string
+          public_url?: string | null
+          storage_path?: string | null
+          whatsapp_number_id: string
+          workflow_id: string
+        }
+        Update: {
+          contact_id?: string | null
+          created_at?: string | null
+          file_size?: number | null
+          id?: string
+          media_id?: string | null
+          message_id?: string | null
+          metadata?: Json | null
+          mime_type?: string | null
+          project_id?: string
+          public_url?: string | null
+          storage_path?: string | null
+          whatsapp_number_id?: string
+          workflow_id?: string
+        }
+        Relationships: []
+      }
+      templates: {
+        Row: {
+          category: string
+          created_at: string | null
+          id: string
+          language: string
+          phone_number_id: string
+          preview_text: string | null
+          status: string
+          variables_count: number | null
+          wa_template_code: string
+          wa_template_name: string
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          id?: string
+          language: string
+          phone_number_id: string
+          preview_text?: string | null
+          status: string
+          variables_count?: number | null
+          wa_template_code: string
+          wa_template_name: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          id?: string
+          language?: string
+          phone_number_id?: string
+          preview_text?: string | null
+          status?: string
+          variables_count?: number | null
+          wa_template_code?: string
+          wa_template_name?: string
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          is_active: boolean | null
+          password_hash: string
+          role: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          is_active?: boolean | null
+          password_hash: string
+          role?: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          is_active?: boolean | null
+          password_hash?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      webhook_endpoints: {
+        Row: {
+          created_at: string | null
+          events: Json | null
+          id: string
+          is_active: boolean | null
+          project_id: string
+          url: string
+        }
+        Insert: {
+          created_at?: string | null
+          events?: Json | null
+          id?: string
+          is_active?: boolean | null
+          project_id: string
+          url: string
+        }
+        Update: {
+          created_at?: string | null
+          events?: Json | null
+          id?: string
+          is_active?: boolean | null
+          project_id?: string
+          url?: string
+        }
+        Relationships: []
+      }
+      webhook_events: {
+        Row: {
+          created_at: string | null
+          event_hash: string
+          id: string
+          payload: Json
+          raw_body: string | null
+          signature: string | null
+          source: string
+        }
+        Insert: {
+          created_at?: string | null
+          event_hash: string
+          id?: string
+          payload: Json
+          raw_body?: string | null
+          signature?: string | null
+          source: string
+        }
+        Update: {
+          created_at?: string | null
+          event_hash?: string
+          id?: string
+          payload?: Json
+          raw_body?: string | null
+          signature?: string | null
+          source?: string
+        }
+        Relationships: []
+      }
+      workflow_steps: {
+        Row: {
+          config: Json | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          type: string
+          workflow_id: string
+        }
+        Insert: {
+          config?: Json | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          type: string
+          workflow_id: string
+        }
+        Update: {
+          config?: Json | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          type?: string
+          workflow_id?: string
+        }
+        Relationships: []
+      }
+      workflows: {
+        Row: {
+          ai_enabled: boolean | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          is_default: boolean | null
+          name: string
+          project_id: string
+        }
+        Insert: {
+          ai_enabled?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_default?: boolean | null
+          name: string
+          project_id: string
+        }
+        Update: {
+          ai_enabled?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_default?: boolean | null
+          name?: string
+          project_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
