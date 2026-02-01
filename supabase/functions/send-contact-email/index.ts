@@ -19,6 +19,65 @@ interface ContactEmailRequest {
   budget?: string;
 }
 
+// Input validation functions
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 255;
+}
+
+function isValidPhone(phone: string): boolean {
+  if (!phone) return true; // Optional field
+  const phoneRegex = /^[\d\s\+\-\(\)]+$/;
+  return phoneRegex.test(phone) && phone.length <= 20;
+}
+
+function sanitizeInput(input: string, maxLength: number = 1000): string {
+  if (!input) return '';
+  // Remove HTML tags and limit length
+  return input
+    .replace(/<[^>]*>/g, '')
+    .replace(/[<>]/g, '')
+    .trim()
+    .substring(0, maxLength);
+}
+
+function validateRequest(data: ContactEmailRequest): { valid: boolean; error?: string } {
+  // Required fields
+  if (!data.name || !data.email || !data.message) {
+    return { valid: false, error: 'الحقول المطلوبة: الاسم، البريد الإلكتروني، والرسالة' };
+  }
+
+  // Email validation
+  if (!isValidEmail(data.email)) {
+    return { valid: false, error: 'البريد الإلكتروني غير صالح' };
+  }
+
+  // Phone validation
+  if (data.phone && !isValidPhone(data.phone)) {
+    return { valid: false, error: 'رقم الهاتف غير صالح' };
+  }
+
+  // Length validations
+  if (data.name.length > 100) {
+    return { valid: false, error: 'الاسم يجب أن يكون أقل من 100 حرف' };
+  }
+
+  if (data.message.length > 2000) {
+    return { valid: false, error: 'الرسالة يجب أن تكون أقل من 2000 حرف' };
+  }
+
+  if (data.company && data.company.length > 100) {
+    return { valid: false, error: 'اسم الشركة يجب أن يكون أقل من 100 حرف' };
+  }
+
+  // Type validation
+  if (!['consultation', 'inquiry'].includes(data.type)) {
+    return { valid: false, error: 'نوع الطلب غير صالح' };
+  }
+
+  return { valid: true };
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -26,16 +85,45 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { type, name, email, phone, company, message, projectType, budget }: ContactEmailRequest = await req.json();
+    const rawData = await req.json();
+    
+    // Sanitize inputs
+    const data: ContactEmailRequest = {
+      type: rawData.type,
+      name: sanitizeInput(rawData.name, 100),
+      email: sanitizeInput(rawData.email, 255),
+      phone: sanitizeInput(rawData.phone || '', 20),
+      company: sanitizeInput(rawData.company || '', 100),
+      message: sanitizeInput(rawData.message, 2000),
+      projectType: sanitizeInput(rawData.projectType || '', 50),
+      budget: sanitizeInput(rawData.budget || '', 50),
+    };
 
-    console.log("Processing contact email:", { type, name, email });
+    // Validate request
+    const validation = validateRequest(data);
+    if (!validation.valid) {
+      return new Response(
+        JSON.stringify({ 
+          success: false,
+          error: validation.error
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const { type, name, email, phone, company, message, projectType, budget } = data;
+
+    console.log("Processing contact email:", { type, name, email: email.substring(0, 5) + '***' });
 
     if (!RESEND_API_KEY) {
       console.error("RESEND_API_KEY is not configured");
       return new Response(
         JSON.stringify({ 
           success: true,
-          message: "تم استلام رسالتك - Email service not configured"
+          message: "تم استلام رسالتك"
         }),
         {
           status: 200,
@@ -87,7 +175,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     const companyResult = await companyEmailResponse.json();
-    console.log("Company email result:", companyResult);
+    console.log("Company email sent successfully");
 
     // Send confirmation to client
     const clientEmailResponse = await fetch("https://api.resend.com/emails", {
@@ -143,7 +231,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     const clientResult = await clientEmailResponse.json();
-    console.log("Client email result:", clientResult);
+    console.log("Client email sent successfully");
 
     return new Response(JSON.stringify({ 
       success: true,
@@ -156,10 +244,10 @@ const handler = async (req: Request): Promise<Response> => {
       },
     });
   } catch (error: any) {
-    console.error("Error in send-contact-email function:", error);
+    console.error("Error in send-contact-email function");
     return new Response(
       JSON.stringify({ 
-        error: error.message,
+        success: false,
         message: "فشل في إرسال الرسائل"
       }),
       {
