@@ -1,17 +1,26 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import ContactModal from './ContactModal';
 import LanguageToggle from './LanguageToggle';
 import { ThemeToggle } from './ThemeToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Menu, X, Code2, Zap, ChevronDown, Sparkles } from 'lucide-react';
+import { Code2, ChevronDown, Sparkles, FileText, Briefcase, Download, Users, Mail, Home } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { toast } = useToast();
   const { t, language, isRTL } = useLanguage();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,12 +37,23 @@ const Header = () => {
     });
   };
 
-  const navigation = [
+  // Section links for homepage
+  const sectionLinks = [
     { name: t('home'), href: '#home' },
     { name: t('services'), href: '#services' },
     { name: t('team'), href: '#team' },
     { name: t('projects'), href: '#projects' },
     { name: t('contact'), href: '#contact' },
+  ];
+
+  // Page links for dropdown
+  const pageLinks = [
+    { name: t('home'), href: '/', icon: Home },
+    { name: t('about'), href: '/about', icon: Users },
+    { name: t('services'), href: '/services', icon: Briefcase },
+    { name: t('allProjects'), href: '/projects', icon: FileText },
+    { name: t('contact'), href: '/contact', icon: Mail },
+    { name: t('installApp'), href: '/install', icon: Download },
   ];
 
   return (
@@ -47,8 +67,8 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a 
-            href="#home" 
+          <Link 
+            to="/" 
             className={`flex items-center gap-3 group ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             <div className="relative">
@@ -63,11 +83,12 @@ const Header = () => {
               </div>
               <div className="text-xs text-muted-foreground">{t('companySubtitle')}</div>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className={`hidden lg:flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {navigation.map((item) => (
+            {/* Show section links only on homepage */}
+            {isHomePage && sectionLinks.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -76,6 +97,35 @@ const Header = () => {
                 {item.name}
               </a>
             ))}
+            
+            {/* Pages Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="nav-link flex items-center gap-1">
+                  {t('pages')}
+                  <ChevronDown className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align={isRTL ? 'start' : 'end'} 
+                className="w-48 bg-card border border-border shadow-lg z-50"
+              >
+                {pageLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <Link 
+                        to={item.href} 
+                        className={`flex items-center gap-2 w-full cursor-pointer ${isRTL ? 'flex-row-reverse' : ''}`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {item.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  );
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Actions */}
@@ -135,17 +185,38 @@ const Header = () => {
           }`}
         >
           <div className="glass rounded-2xl p-4 border border-border/50">
+            {/* Section Links (only on homepage) */}
+            {isHomePage && (
+              <nav className="flex flex-col gap-2 mb-4 pb-4 border-b border-border/50">
+                {sectionLinks.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="px-4 py-3 rounded-xl hover:bg-primary/10 transition-colors text-foreground font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </nav>
+            )}
+            
+            {/* Page Links */}
             <nav className="flex flex-col gap-2">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="px-4 py-3 rounded-xl hover:bg-primary/10 transition-colors text-foreground font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
+              {pageLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={`px-4 py-3 rounded-xl hover:bg-primary/10 transition-colors text-foreground font-medium flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon className="w-4 h-4 text-primary" />
+                    {item.name}
+                  </Link>
+                );
+              })}
             </nav>
             
             <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border/50">

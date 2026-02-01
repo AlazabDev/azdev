@@ -8,6 +8,10 @@ export const translations = {
     contact: 'تواصل معنا',
     dashboard: 'لوحة التحكم',
     startProject: 'ابدأ مشروعك',
+    pages: 'الصفحات',
+    about: 'من نحن',
+    allProjects: 'جميع المشاريع',
+    installApp: 'تثبيت التطبيق',
     
     // Company Info
     companyName: 'alazab.dev',
@@ -115,6 +119,10 @@ export const translations = {
     contact: 'Contact',
     dashboard: 'Dashboard',
     startProject: 'Start Project',
+    pages: 'Pages',
+    about: 'About Us',
+    allProjects: 'All Projects',
+    installApp: 'Install App',
     
     // Company Info
     companyName: 'alazab.dev',

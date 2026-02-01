@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/components/ui/use-toast';
 import { Calendar, Send, Loader2, Clock } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface ContactModalProps {
   trigger: React.ReactNode;
@@ -47,24 +48,19 @@ const ContactModal = ({ trigger, title = "احجز استشارة مجانية",
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://shindkpwyxpsexhhfsyg.supabase.co/functions/v1/send-contact-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNoaW5ka3B3eXhwc2V4aGhmc3lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwNDg2MTMsImV4cCI6MjA2ODYyNDYxM30.DqI8t-vaf8siB9Z6VN42Zi5ZLkj6Xf3bYIwcONp4fNs'}`
-        },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
           type: 'consultation',
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           company: formData.company,
           message: formData.message
-        })
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('فشل في إرسال البيانات');
+      if (error) {
+        throw new Error(error.message || 'فشل في إرسال البيانات');
       }
       
       toast({
@@ -82,7 +78,7 @@ const ContactModal = ({ trigger, title = "احجز استشارة مجانية",
       });
       setOpen(false);
     } catch (error) {
-      console.error('Error sending consultation request:', error);
+      // Silent error handling - show user-friendly message only
       toast({
         title: "فشل في الحجز",
         description: "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى",
