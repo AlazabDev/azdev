@@ -177,13 +177,13 @@ const TeamSection = () => {
               
               {/* Social Links */}
               <div className={`flex justify-center gap-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200">
+                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200" aria-label={`GitHub - ${member.name}`}>
                   <Github className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200">
+                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200" aria-label={`LinkedIn - ${member.name}`}>
                   <Linkedin className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200">
+                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200" aria-label={`${language === 'ar' ? 'بريد' : 'Email'} - ${member.name}`}>
                   <Mail className="w-4 h-4" />
                 </Button>
               </div>
