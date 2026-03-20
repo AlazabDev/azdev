@@ -92,6 +92,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 src={project.coverImage} 
                 alt={language === 'ar' ? project.title.ar : project.title.en}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
               />
             </div>
             

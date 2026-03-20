@@ -174,7 +174,7 @@ const ContactSection = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <MessageSquare className={`w-4 h-4 text-primary ${isRTL ? 'ml-2' : 'mr-2'}`} />
-            <span className="text-sm text-primary font-medium">{t('contact')}</span>
+            <span className="text-sm text-primary font-semibold">{t('contact')}</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-tech bg-clip-text text-transparent">
@@ -284,12 +284,14 @@ const ContactSection = () => {
                 </div>
 
                 <div className={isRTL ? 'text-right' : 'text-left'}>
-                  <label className="block text-sm font-medium mb-2">{t('projectType')}</label>
+                  <label htmlFor="projectType" className="block text-sm font-medium mb-2">{t('projectType')}</label>
                   <select 
+                    id="projectType"
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
                     className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                    aria-label={language === 'ar' ? 'اختر نوع المشروع' : 'Select project type'}
                   >
                     {projectTypes.map((type) => (
                       <option key={type.value} value={type.value}>{type.label}</option>
@@ -310,12 +312,14 @@ const ContactSection = () => {
                 </div>
 
                 <div className={isRTL ? 'text-right' : 'text-left'}>
-                  <label className="block text-sm font-medium mb-2">{t('budget')}</label>
+                  <label htmlFor="budget" className="block text-sm font-medium mb-2">{t('budget')}</label>
                   <select 
+                    id="budget"
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
                     className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                    aria-label={language === 'ar' ? 'اختر النطاق المناسب' : 'Select budget range'}
                   >
                     {budgetOptions.map((option) => (
                       <option key={option.value} value={option.value}>{option.label}</option>

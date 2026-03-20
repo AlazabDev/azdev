@@ -78,8 +78,8 @@ const ServicesSection = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-muted/30" />
       <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-10" />
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse will-change-transform" />
+      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse will-change-transform" style={{ animationDelay: '1.5s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}

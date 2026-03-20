@@ -135,6 +135,7 @@ const TeamSection = () => {
                     <img 
                       src={member.image} 
                       alt={member.name}
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
@@ -177,13 +178,13 @@ const TeamSection = () => {
               
               {/* Social Links */}
               <div className={`flex justify-center gap-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200">
+                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200" aria-label={`GitHub - ${member.name}`}>
                   <Github className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200">
+                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200" aria-label={`LinkedIn - ${member.name}`}>
                   <Linkedin className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200">
+                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-200" aria-label={`${language === 'ar' ? 'بريد' : 'Email'} - ${member.name}`}>
                   <Mail className="w-4 h-4" />
                 </Button>
               </div>
@@ -195,9 +196,9 @@ const TeamSection = () => {
         <Card className="p-8 glass border-primary/20 text-center animate-fade-in hover:shadow-glow transition-all duration-500 group">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors duration-300">
             <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-            <span className="text-sm font-medium text-primary">{language === 'ar' ? 'رؤيتنا' : 'Our Vision'}</span>
+            <span className="text-sm font-semibold text-primary">{language === 'ar' ? 'رؤيتنا' : 'Our Vision'}</span>
           </div>
-          <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed group-hover:text-foreground transition-colors duration-300">
+          <p className="text-lg text-foreground/70 max-w-4xl mx-auto leading-relaxed group-hover:text-foreground transition-colors duration-300">
             {language === 'ar' 
               ? 'نؤمن بأن التكنولوجيا هي المحرك الأساسي للتطوير والنمو. فريقنا يعمل بشغف لتحويل الأفكار المبتكرة إلى حلول عملية تساهم في بناء مستقبل رقمي أفضل.' 
               : 'We believe that technology is the main driver of development and growth. Our team works passionately to transform innovative ideas into practical solutions for a better digital future.'
