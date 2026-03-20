@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Install from "./pages/Install";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,8 @@ const App = () => (
               <Route path="/install" element={<Install />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
+              <Route path="/auth/v1/callback" element={<AuthCallback />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
