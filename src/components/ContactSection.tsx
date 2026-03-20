@@ -312,12 +312,14 @@ const ContactSection = () => {
                 </div>
 
                 <div className={isRTL ? 'text-right' : 'text-left'}>
-                  <label className="block text-sm font-medium mb-2">{t('budget')}</label>
+                  <label htmlFor="budget" className="block text-sm font-medium mb-2">{t('budget')}</label>
                   <select 
+                    id="budget"
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
                     className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                    aria-label={language === 'ar' ? 'اختر النطاق المناسب' : 'Select budget range'}
                   >
                     {budgetOptions.map((option) => (
                       <option key={option.value} value={option.value}>{option.label}</option>
