@@ -69,7 +69,9 @@ const Footer = () => {
     { name: t('services'), href: '#services' },
     { name: t('projects'), href: '#projects' },
     { name: t('team'), href: '#team' },
-    { name: t('contact'), href: '#contact' }
+    { name: t('contact'), href: '#contact' },
+    { name: language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy', href: '/privacy-policy', isRoute: true },
+    { name: language === 'ar' ? 'الشروط والأحكام' : 'Terms of Service', href: '/terms-of-service', isRoute: true },
   ];
 
   const socialLinks = [
