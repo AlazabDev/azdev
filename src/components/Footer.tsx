@@ -71,6 +71,7 @@ const Footer = () => {
     { name: t('team'), href: '#team' },
     { name: t('contact'), href: '#contact' },
     { name: language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy', href: '/privacy-policy', isRoute: true },
+    { name: language === 'ar' ? 'سياسة ملفات تعريف الارتباط' : 'Cookies Policy', href: '/cookies-policy', isRoute: true },
     { name: language === 'ar' ? 'الشروط والأحكام' : 'Terms of Service', href: '/terms-of-service', isRoute: true },
   ];
 
@@ -246,6 +247,9 @@ const Footer = () => {
           <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <Link to="/privacy-policy" className="hover:text-primary hover:underline transition-all duration-300">
               {language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
+            </Link>
+            <Link to="/cookies-policy" className="hover:text-primary hover:underline transition-all duration-300">
+              {language === 'ar' ? 'سياسة الكوكيز' : 'Cookies'}
             </Link>
             <Link to="/terms-of-service" className="hover:text-primary hover:underline transition-all duration-300">
               {language === 'ar' ? 'الشروط والأحكام' : 'Terms of Service'}
