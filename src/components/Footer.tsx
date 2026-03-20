@@ -185,13 +185,23 @@ const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href={link.href} 
-                    className={`text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-1 group hover:translate-x-1 ${isRTL ? 'flex-row-reverse hover:-translate-x-1' : ''}`}
-                  >
-                    {link.name}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
+                  {link.isRoute ? (
+                    <Link
+                      to={link.href}
+                      className={`text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-1 group hover:translate-x-1 ${isRTL ? 'flex-row-reverse hover:-translate-x-1' : ''}`}
+                    >
+                      {link.name}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className={`text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-1 group hover:translate-x-1 ${isRTL ? 'flex-row-reverse hover:-translate-x-1' : ''}`}
+                    >
+                      {link.name}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
