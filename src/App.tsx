@@ -13,6 +13,8 @@ import ProjectDetails from "./pages/ProjectDetails";
 import MaintenanceSystem from "./pages/MaintenanceSystem";
 import Contact from "./pages/Contact";
 import Install from "./pages/Install";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
