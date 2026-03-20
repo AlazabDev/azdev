@@ -14,6 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
+      app_secrets: {
+        Row: {
+          created_at: string | null
+          id: string
+          key: string
+          updated_at: string | null
+          value: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          key: string
+          updated_at?: string | null
+          value: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          key?: string
+          updated_at?: string | null
+          value?: string
+        }
+        Relationships: []
+      }
+      branches: {
+        Row: {
+          company_id: string | null
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          company_id?: string | null
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          company_id?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+        }
+        Relationships: []
+      }
+      chatbot_knowledge: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          file_name: string | null
+          id: string
+          is_active: boolean
+          source_type: string
+          title: string
+        }
+        Insert: {
+          category?: string
+          content: string
+          created_at?: string
+          file_name?: string | null
+          id?: string
+          is_active?: boolean
+          source_type?: string
+          title: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          file_name?: string | null
+          id?: string
+          is_active?: boolean
+          source_type?: string
+          title?: string
+        }
+        Relationships: []
+      }
       integrations: {
         Row: {
           config: Json | null
@@ -40,6 +139,86 @@ export type Database = {
           type?: string
         }
         Relationships: []
+      }
+      keepalive: {
+        Row: {
+          id: number
+        }
+        Insert: {
+          id: number
+        }
+        Update: {
+          id?: number
+        }
+        Relationships: []
+      }
+      maintenance_requests: {
+        Row: {
+          actual_cost: number | null
+          branch_id: string | null
+          client_email: string | null
+          client_name: string | null
+          client_phone: string | null
+          company_id: string | null
+          created_at: string
+          description: string | null
+          estimated_cost: number | null
+          id: string
+          location: string | null
+          priority: string | null
+          service_type: string | null
+          sla_due_date: string | null
+          status: Database["public"]["Enums"]["mr_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          actual_cost?: number | null
+          branch_id?: string | null
+          client_email?: string | null
+          client_name?: string | null
+          client_phone?: string | null
+          company_id?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_cost?: number | null
+          id?: string
+          location?: string | null
+          priority?: string | null
+          service_type?: string | null
+          sla_due_date?: string | null
+          status?: Database["public"]["Enums"]["mr_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          actual_cost?: number | null
+          branch_id?: string | null
+          client_email?: string | null
+          client_name?: string | null
+          client_phone?: string | null
+          company_id?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_cost?: number | null
+          id?: string
+          location?: string | null
+          priority?: string | null
+          service_type?: string | null
+          sla_due_date?: string | null
+          status?: Database["public"]["Enums"]["mr_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "maintenance_requests_branch_id_fkey"
+            columns: ["branch_id"]
+            isOneToOne: false
+            referencedRelation: "branches"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       media_files: {
         Row: {
@@ -89,6 +268,84 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          budget: number | null
+          category: string | null
+          company_name: string | null
+          cover_image_url: string | null
+          created_at: string
+          description: string | null
+          end_date: string | null
+          id: string
+          location: string | null
+          model_3d_url: string | null
+          name: string
+          progress: number | null
+          start_date: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          budget?: number | null
+          category?: string | null
+          company_name?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          location?: string | null
+          model_3d_url?: string | null
+          name: string
+          progress?: number | null
+          start_date?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          budget?: number | null
+          category?: string | null
+          company_name?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          location?: string | null
+          model_3d_url?: string | null
+          name?: string
+          progress?: number | null
+          start_date?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      request_server: {
+        Row: {
+          data: Json | null
+          id: number
+          inserted_at: string
+          name: string | null
+          updated_at: string
+        }
+        Insert: {
+          data?: Json | null
+          id?: number
+          inserted_at?: string
+          name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          data?: Json | null
+          id?: number
+          inserted_at?: string
+          name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       templates: {
         Row: {
           category: string
@@ -125,6 +382,24 @@ export type Database = {
           variables_count?: number | null
           wa_template_code?: string
           wa_template_name?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -212,6 +487,87 @@ export type Database = {
         }
         Relationships: []
       }
+      whatsapp_flows: {
+        Row: {
+          categories: string[] | null
+          created_at: string | null
+          id: string
+          json_version: string | null
+          name: string
+          preview_url: string | null
+          status: string | null
+          updated_at: string | null
+          validation_errors: Json | null
+          wa_flow_id: string | null
+        }
+        Insert: {
+          categories?: string[] | null
+          created_at?: string | null
+          id?: string
+          json_version?: string | null
+          name: string
+          preview_url?: string | null
+          status?: string | null
+          updated_at?: string | null
+          validation_errors?: Json | null
+          wa_flow_id?: string | null
+        }
+        Update: {
+          categories?: string[] | null
+          created_at?: string | null
+          id?: string
+          json_version?: string | null
+          name?: string
+          preview_url?: string | null
+          status?: string | null
+          updated_at?: string | null
+          validation_errors?: Json | null
+          wa_flow_id?: string | null
+        }
+        Relationships: []
+      }
+      whatsapp_messages: {
+        Row: {
+          content: string | null
+          created_at: string
+          customer_name: string | null
+          direction: string
+          id: string
+          media_mime_type: string | null
+          media_url: string | null
+          message_type: string
+          phone_number: string
+          status: string | null
+          wa_message_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          customer_name?: string | null
+          direction?: string
+          id?: string
+          media_mime_type?: string | null
+          media_url?: string | null
+          message_type?: string
+          phone_number: string
+          status?: string | null
+          wa_message_id?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          customer_name?: string | null
+          direction?: string
+          id?: string
+          media_mime_type?: string | null
+          media_url?: string | null
+          message_type?: string
+          phone_number?: string
+          status?: string | null
+          wa_message_id?: string | null
+        }
+        Relationships: []
+      }
       workflow_steps: {
         Row: {
           config: Json | null
@@ -274,10 +630,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      mr_status: "Open" | "InProgress" | "Completed" | "Cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -404,6 +760,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      mr_status: ["Open", "InProgress", "Completed", "Cancelled"],
+    },
   },
 } as const

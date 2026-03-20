@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
@@ -231,12 +232,12 @@ const Footer = () => {
           </div>
           
           <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <a href="#" className="hover:text-primary hover:underline transition-all duration-300">
+            <Link to="/privacy-policy" className="hover:text-primary hover:underline transition-all duration-300">
               {language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
-            </a>
-            <a href="#" className="hover:text-primary hover:underline transition-all duration-300">
+            </Link>
+            <Link to="/terms-of-service" className="hover:text-primary hover:underline transition-all duration-300">
               {language === 'ar' ? 'الشروط والأحكام' : 'Terms of Service'}
-            </a>
+            </Link>
           </div>
         </div>
 

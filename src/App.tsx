@@ -13,6 +13,8 @@ import ProjectDetails from "./pages/ProjectDetails";
 import MaintenanceSystem from "./pages/MaintenanceSystem";
 import Contact from "./pages/Contact";
 import Install from "./pages/Install";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
               <Route path="/maintenance-system" element={<MaintenanceSystem />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/install" element={<Install />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
