@@ -174,7 +174,7 @@ const ContactSection = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <MessageSquare className={`w-4 h-4 text-primary ${isRTL ? 'ml-2' : 'mr-2'}`} />
-            <span className="text-sm text-primary font-medium">{t('contact')}</span>
+            <span className="text-sm text-primary font-semibold">{t('contact')}</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-tech bg-clip-text text-transparent">

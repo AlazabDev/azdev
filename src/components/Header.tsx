@@ -156,6 +156,8 @@ const Header = () => {
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="relative"
+              aria-label={isMenuOpen ? (language === 'ar' ? 'إغلاق القائمة' : 'Close menu') : (language === 'ar' ? 'فتح القائمة' : 'Open menu')}
+              aria-expanded={isMenuOpen}
             >
               <div className="relative w-6 h-6 flex items-center justify-center">
                 <span 

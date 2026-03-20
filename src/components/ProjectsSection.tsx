@@ -198,10 +198,10 @@ const ProjectsSection = () => {
                   </div>
                   
                   <div className={`flex space-x-2 ${isRTL ? 'space-x-reverse' : ''} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" aria-label={`GitHub - ${project.title}`}>
                       <Github className="w-4 h-4" />
                     </Button>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" aria-label={`${language === 'ar' ? 'رابط خارجي' : 'External link'} - ${project.title}`}>
                       <ExternalLink className="w-4 h-4" />
                     </Button>
                   </div>
