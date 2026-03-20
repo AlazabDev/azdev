@@ -248,6 +248,9 @@ const Footer = () => {
             <Link to="/privacy-policy" className="hover:text-primary hover:underline transition-all duration-300">
               {language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
             </Link>
+            <Link to="/cookies-policy" className="hover:text-primary hover:underline transition-all duration-300">
+              {language === 'ar' ? 'سياسة الكوكيز' : 'Cookies'}
+            </Link>
             <Link to="/terms-of-service" className="hover:text-primary hover:underline transition-all duration-300">
               {language === 'ar' ? 'الشروط والأحكام' : 'Terms of Service'}
             </Link>

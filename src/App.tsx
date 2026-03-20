@@ -39,6 +39,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/install" element={<Install />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/cookies-policy" element={<CookiesPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
               <Route path="/auth/v1/callback" element={<AuthCallback />} />
