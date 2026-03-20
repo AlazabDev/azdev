@@ -71,6 +71,7 @@ const Footer = () => {
     { name: t('team'), href: '#team' },
     { name: t('contact'), href: '#contact' },
     { name: language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy', href: '/privacy-policy', isRoute: true },
+    { name: language === 'ar' ? 'سياسة ملفات تعريف الارتباط' : 'Cookies Policy', href: '/cookies-policy', isRoute: true },
     { name: language === 'ar' ? 'الشروط والأحكام' : 'Terms of Service', href: '/terms-of-service', isRoute: true },
   ];
 
