@@ -123,24 +123,7 @@ npm run clean	تنظيف الملفات المؤقتة
 
 اتبع التعليمات لتحديث إعدادات DNS
 
-🏗️ هيكل المشروع
-text
-alazab.dev/
-├── public/              # الملفات الثابتة
-│   ├── alazab-icon.png  # أيقونة الموقع
-│   └── robots.txt       # ملف robots لمحركات البحث
-├── src/
-│   ├── components/      # مكونات React
-│   ├── hooks/           # Hooks مخصصة
-│   ├── lib/            # مكتبات وأدوات مساعدة
-│   ├── pages/          # صفحات الموقع
-│   ├── types/          # تعريفات TypeScript
-│   └── App.tsx         # المكون الرئيسي
-├── index.html          # ملف HTML الرئيسي
-├── vite.config.ts      # إعدادات Vite
-├── tailwind.config.js  # إعدادات Tailwind
-├── tsconfig.json       # إعدادات TypeScript
-└── package.json        # اعتماديات المشروع
+اعتماديات المشروع
 🤝 المساهمة
 نرحب بمساهماتكم! يرجى اتباع الخطوات التالية:
 
