@@ -1,73 +1,180 @@
-# Welcome to your Lovable project
+# alazab.dev - Advanced Tech Solutions
 
-## Project info
+<div align="center">
+  <img src="public/alazab-icon.png" alt="alazab.dev Logo" width="120" height="120" />
+  <h3>موقع alazab.dev الرسمي</h3>
+  <p>حلول تقنية متقدمة للمشاريع الإنشائية والمعمارية</p>
+</div>
 
-**URL**: https://lovable.dev/projects/f1f7bc7d-4d75-4208-8f26-37c73696bdb5
+## 📋 نظرة عامة
 
-## How can I edit this code?
+موقع **alazab.dev** هو المنصة الرسمية لفريق تقني متخصص في تقديم الحلول التقنية المتقدمة لقطاع الإنشاءات والمشاريع المعمارية. يقدم الموقع خدماتنا ومشاريعنا بطريقة عصرية وسهلة الاستخدام.
 
-There are several ways of editing your application.
+**الرابط**: [https://www.alazab.dev](https://www.alazab.dev)
 
-**Use Lovable**
+## ✨ المميزات
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f1f7bc7d-4d75-4208-8f26-37c73696bdb5) and start prompting.
+- 🚀 **أداء عالي** - مبني باستخدام Vite و React لسرعة تحميل فائقة
+- 📱 **متجاوب بالكامل** - يعمل بشكل مثالي على جميع الأجهزة
+- 🎨 **واجهة مستخدم عصرية** - بتصميم أنيق باستخدام shadcn-ui و Tailwind CSS
+- 🔍 **محسن لمحركات البحث** - بنية متوافقة مع SEO
+- 📦 **PWA** - يمكن تثبيته كتطبيق على الأجهزة
+- 🔒 **آمن** - أفضل ممارسات الأمان
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ التقنيات المستخدمة
 
-**Use your preferred IDE**
+- **الفرونت إند**: React 18, TypeScript
+- **الأدوات**: Vite, SWC
+- **التصميم**: Tailwind CSS, shadcn-ui, Radix UI
+- **إدارة الحالة**: TanStack Query
+- **النماذج**: React Hook Form, Zod
+- **الرسوم البيانية**: Recharts
+- **قاعدة البيانات**: Supabase
+- **PWA**: vite-plugin-pwa
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📥 التثبيت والتشغيل المحلي
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### المتطلبات الأساسية
 
-Follow these steps:
+- Node.js (الإصدار 18 أو أحدث)
+- npm (الإصدار 8 أو أحدث)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### خطوات التثبيت
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. **استنساخ المشروع**
+   ```bash
+   git clone https://github.com/alazab-dev/alazab.dev.git
+   cd alazab.dev
+تثبيت الاعتماديات
 
-# Step 3: Install the necessary dependencies.
-npm i
+bash
+npm install
+إعداد متغيرات البيئة
+قم بإنشاء ملف .env في المجلد الرئيسي:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+تشغيل خادم التطوير
+
+bash
 npm run dev
-```
+سيفتح الموقع تلقائياً على http://localhost:8080
 
-**Edit a file directly in GitHub**
+📦 أوامر المشروع
+الأمر	الوصف
+npm run dev	تشغيل وضع التطوير
+npm run build	بناء المشروع للإنتاج
+npm run build:dev	بناء المشروع لوضع التطوير
+npm run preview	معاينة نسخة الإنتاج محلياً
+npm run lint	فحص الأكواد
+npm run format	تنسيق الأكواد
+npm run type-check	فحص أنواع TypeScript
+npm run clean	تنظيف الملفات المؤقتة
+🌐 النشر والإستضافة
+النشر على Vercel (مقترح)
+ادفع الكود إلى مستودع GitHub
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+سجل دخولك إلى Vercel
 
-**Use GitHub Codespaces**
+انقر على "Add New Project"
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+اختر المستودع الخاص بك
 
-## What technologies are used for this project?
+أضف متغيرات البيئة المطلوبة
 
-This project is built with:
+انقر على "Deploy"
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+النشر على Netlify
+ادفع الكود إلى مستودع GitHub
 
-## How can I deploy this project?
+سجل دخولك إلى Netlify
 
-Simply open [Lovable](https://lovable.dev/projects/f1f7bc7d-4d75-4208-8f26-37c73696bdb5) and click on Share -> Publish.
+انقر على "Import from Git"
 
-## Can I connect a custom domain to my Lovable project?
+اختر المستودع والإعدادات
 
-Yes, you can!
+أمر البناء: npm run build
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+مجلد النشر: dist
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+🔗 ربط النطاق المخصص
+ربط alazab.dev مع Vercel
+في لوحة تحكم Vercel، اختر المشروع
+
+اذهب إلى Settings > Domains
+
+أضف النطاق alazab.dev
+
+اتبع التعليمات لإعداد DNS:
+
+أضف سجلات CNAME أو A المطلوبة
+
+انتظر حتى يتم التحقق
+
+ربط alazab.dev مع Netlify
+في لوحة تحكم Netlify، اختر المشروع
+
+اذهب إلى Site settings > Domain management
+
+انقر على "Add custom domain"
+
+أدخل alazab.dev
+
+اتبع التعليمات لتحديث إعدادات DNS
+
+🏗️ هيكل المشروع
+text
+alazab.dev/
+├── public/              # الملفات الثابتة
+│   ├── alazab-icon.png  # أيقونة الموقع
+│   └── robots.txt       # ملف robots لمحركات البحث
+├── src/
+│   ├── components/      # مكونات React
+│   ├── hooks/           # Hooks مخصصة
+│   ├── lib/            # مكتبات وأدوات مساعدة
+│   ├── pages/          # صفحات الموقع
+│   ├── types/          # تعريفات TypeScript
+│   └── App.tsx         # المكون الرئيسي
+├── index.html          # ملف HTML الرئيسي
+├── vite.config.ts      # إعدادات Vite
+├── tailwind.config.js  # إعدادات Tailwind
+├── tsconfig.json       # إعدادات TypeScript
+└── package.json        # اعتماديات المشروع
+🤝 المساهمة
+نرحب بمساهماتكم! يرجى اتباع الخطوات التالية:
+
+Fork المشروع
+
+إنشاء فرع جديد (git checkout -b feature/amazing-feature)
+
+Commit التغييرات (git commit -m 'إضافة ميزة رائعة')
+
+Push إلى الفرع (git push origin feature/amazing-feature)
+
+فتح Pull Request
+
+📄 الترخيص
+هذا المشروع مرخص تحت رخصة MIT - انظر ملف LICENSE للتفاصيل.
+
+📞 التواصل
+الموقع: https://www.alazab.dev
+
+البريد الإلكتروني: contact@alazab.dev
+
+تويتر: @alazab_dev
+
+لينكد إن: alazab-dev
+
+
+   <br>
+<br>
+<div align="center">
+	<a href="https://alazab.dev">
+		<picture>
+			<div style="text-align:center;">
+       <a href="https://alazab.dev" target="_blank">
+    <img src="https://al-azab.co/images/logaz.gif" alt="Alazab.Dev" height="62" style="display:inline-block;">
+		</picture>
+	</a>
+</div>
