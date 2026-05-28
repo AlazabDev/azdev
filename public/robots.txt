@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://alazab-tech.com/sitemap.xml
+Sitemap: https://alazab.dev/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
@@ -28,4 +28,4 @@ Disallow: /admin/
 Disallow: /private/
 
 # Host (specify the main domain)
-Host: https://alazab-tech.com
+Host: https://alazab.dev
