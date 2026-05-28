@@ -113,6 +113,273 @@ export type Database = {
         }
         Relationships: []
       }
+      conversation_analytics: {
+        Row: {
+          action_items: Json | null
+          conversation_id: string
+          created_at: string | null
+          entities: Json | null
+          id: number
+          sentiment_label: string | null
+          sentiment_score: number | null
+          summary: string | null
+          topics: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          action_items?: Json | null
+          conversation_id: string
+          created_at?: string | null
+          entities?: Json | null
+          id?: number
+          sentiment_label?: string | null
+          sentiment_score?: number | null
+          summary?: string | null
+          topics?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          action_items?: Json | null
+          conversation_id?: string
+          created_at?: string | null
+          entities?: Json | null
+          id?: number
+          sentiment_label?: string | null
+          sentiment_score?: number | null
+          summary?: string | null
+          topics?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      conversations: {
+        Row: {
+          agent_id: string | null
+          analysis: Json | null
+          audio_url: string | null
+          conversation_id: string
+          created_at: string | null
+          duration_seconds: number | null
+          dynamic_variables: Json | null
+          ended_at: string | null
+          failure_metadata: Json | null
+          failure_reason: string | null
+          has_audio: boolean | null
+          has_transcript: boolean | null
+          id: number
+          started_at: string | null
+          status: string | null
+          telephony_metadata: Json | null
+          transcript: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          agent_id?: string | null
+          analysis?: Json | null
+          audio_url?: string | null
+          conversation_id: string
+          created_at?: string | null
+          duration_seconds?: number | null
+          dynamic_variables?: Json | null
+          ended_at?: string | null
+          failure_metadata?: Json | null
+          failure_reason?: string | null
+          has_audio?: boolean | null
+          has_transcript?: boolean | null
+          id?: number
+          started_at?: string | null
+          status?: string | null
+          telephony_metadata?: Json | null
+          transcript?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          agent_id?: string | null
+          analysis?: Json | null
+          audio_url?: string | null
+          conversation_id?: string
+          created_at?: string | null
+          duration_seconds?: number | null
+          dynamic_variables?: Json | null
+          ended_at?: string | null
+          failure_metadata?: Json | null
+          failure_reason?: string | null
+          has_audio?: boolean | null
+          has_transcript?: boolean | null
+          id?: number
+          started_at?: string | null
+          status?: string | null
+          telephony_metadata?: Json | null
+          transcript?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      cost_estimate_requests: {
+        Row: {
+          accuracy: string | null
+          area: number | null
+          category: string | null
+          city: string | null
+          client_name: string
+          client_phone: string
+          client_type: string | null
+          condition: string | null
+          contingency_pct: number | null
+          created_at: string
+          enabled_items: Json | null
+          estimated_total: number | null
+          finish_level: string | null
+          floors: number | null
+          id: string
+          location: string | null
+          management_pct: number | null
+          notes: string | null
+          per_meter: number | null
+          project_name: string | null
+          range_max: number | null
+          range_min: number | null
+          scope: string | null
+          status: string | null
+          subtype: string | null
+        }
+        Insert: {
+          accuracy?: string | null
+          area?: number | null
+          category?: string | null
+          city?: string | null
+          client_name: string
+          client_phone: string
+          client_type?: string | null
+          condition?: string | null
+          contingency_pct?: number | null
+          created_at?: string
+          enabled_items?: Json | null
+          estimated_total?: number | null
+          finish_level?: string | null
+          floors?: number | null
+          id?: string
+          location?: string | null
+          management_pct?: number | null
+          notes?: string | null
+          per_meter?: number | null
+          project_name?: string | null
+          range_max?: number | null
+          range_min?: number | null
+          scope?: string | null
+          status?: string | null
+          subtype?: string | null
+        }
+        Update: {
+          accuracy?: string | null
+          area?: number | null
+          category?: string | null
+          city?: string | null
+          client_name?: string
+          client_phone?: string
+          client_type?: string | null
+          condition?: string | null
+          contingency_pct?: number | null
+          created_at?: string
+          enabled_items?: Json | null
+          estimated_total?: number | null
+          finish_level?: string | null
+          floors?: number | null
+          id?: string
+          location?: string | null
+          management_pct?: number | null
+          notes?: string | null
+          per_meter?: number | null
+          project_name?: string | null
+          range_max?: number | null
+          range_min?: number | null
+          scope?: string | null
+          status?: string | null
+          subtype?: string | null
+        }
+        Relationships: []
+      }
+      finishing_levels: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          name_en: string | null
+          price_per_sqm: number
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          name_en?: string | null
+          price_per_sqm?: number
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          name_en?: string | null
+          price_per_sqm?: number
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      followup_tasks: {
+        Row: {
+          assigned_to: string | null
+          completed_at: string | null
+          conversation_id: string
+          created_at: string | null
+          description: string | null
+          due_date: string | null
+          id: number
+          metadata: Json | null
+          priority: string | null
+          status: string | null
+          task_type: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          conversation_id: string
+          created_at?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: number
+          metadata?: Json | null
+          priority?: string | null
+          status?: string | null
+          task_type?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          conversation_id?: string
+          created_at?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: number
+          metadata?: Json | null
+          priority?: string | null
+          status?: string | null
+          task_type?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       integrations: {
         Row: {
           config: Json | null
@@ -149,6 +416,30 @@ export type Database = {
         }
         Update: {
           id?: number
+        }
+        Relationships: []
+      }
+      login_otp: {
+        Row: {
+          code: string
+          created_at: string | null
+          expires_at: string
+          id: string
+          phone: string
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          expires_at: string
+          id?: string
+          phone: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          expires_at?: string
+          id?: string
+          phone?: string
         }
         Relationships: []
       }
@@ -268,59 +559,520 @@ export type Database = {
         }
         Relationships: []
       }
+      media_messages: {
+        Row: {
+          conversation_id: string
+          file_size: number | null
+          id: number
+          is_processed: boolean | null
+          media_base64: string | null
+          media_type: string | null
+          media_url: string | null
+          mime_type: string | null
+          processed_at: string | null
+          received_at: string | null
+          transcript: string | null
+        }
+        Insert: {
+          conversation_id: string
+          file_size?: number | null
+          id?: number
+          is_processed?: boolean | null
+          media_base64?: string | null
+          media_type?: string | null
+          media_url?: string | null
+          mime_type?: string | null
+          processed_at?: string | null
+          received_at?: string | null
+          transcript?: string | null
+        }
+        Update: {
+          conversation_id?: string
+          file_size?: number | null
+          id?: number
+          is_processed?: boolean | null
+          media_base64?: string | null
+          media_type?: string | null
+          media_url?: string | null
+          mime_type?: string | null
+          processed_at?: string | null
+          received_at?: string | null
+          transcript?: string | null
+        }
+        Relationships: []
+      }
+      notification_settings: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          setting_key: string
+          setting_value: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          setting_key: string
+          setting_value: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          setting_key?: string
+          setting_value?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      otp_codes: {
+        Row: {
+          attempts: number
+          created_at: string
+          expires_at: string
+          id: string
+          otp_code: string
+          phone_number: string
+          verified: boolean
+        }
+        Insert: {
+          attempts?: number
+          created_at?: string
+          expires_at: string
+          id?: string
+          otp_code: string
+          phone_number: string
+          verified?: boolean
+        }
+        Update: {
+          attempts?: number
+          created_at?: string
+          expires_at?: string
+          id?: string
+          otp_code?: string
+          phone_number?: string
+          verified?: boolean
+        }
+        Relationships: []
+      }
+      project_reviews: {
+        Row: {
+          comment: string
+          created_at: string
+          id: string
+          is_approved: boolean
+          project_id: string
+          rating: number
+          reviewer_email: string | null
+          reviewer_name: string
+          reviewer_phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          comment: string
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          project_id: string
+          rating: number
+          reviewer_email?: string | null
+          reviewer_name: string
+          reviewer_phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          comment?: string
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          project_id?: string
+          rating?: number
+          reviewer_email?: string | null
+          reviewer_name?: string
+          reviewer_phone?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_reviews_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
+          area_sqm: number | null
           budget: number | null
           category: string | null
+          client_name: string | null
           company_name: string | null
+          content_ar: string | null
+          content_en: string | null
           cover_image_url: string | null
           created_at: string
           description: string | null
           end_date: string | null
+          gallery: Json | null
           id: string
+          is_published: boolean
           location: string | null
+          model_3d_embeds: Json | null
           model_3d_url: string | null
           name: string
           progress: number | null
+          slug: string | null
+          sort_order: number
           start_date: string | null
+          stats: Json | null
           status: string | null
+          title_en: string | null
           updated_at: string
+          year: number | null
         }
         Insert: {
+          area_sqm?: number | null
           budget?: number | null
           category?: string | null
+          client_name?: string | null
           company_name?: string | null
+          content_ar?: string | null
+          content_en?: string | null
           cover_image_url?: string | null
           created_at?: string
           description?: string | null
           end_date?: string | null
+          gallery?: Json | null
           id?: string
+          is_published?: boolean
           location?: string | null
+          model_3d_embeds?: Json | null
           model_3d_url?: string | null
           name: string
           progress?: number | null
+          slug?: string | null
+          sort_order?: number
           start_date?: string | null
+          stats?: Json | null
           status?: string | null
+          title_en?: string | null
           updated_at?: string
+          year?: number | null
         }
         Update: {
+          area_sqm?: number | null
           budget?: number | null
           category?: string | null
+          client_name?: string | null
           company_name?: string | null
+          content_ar?: string | null
+          content_en?: string | null
           cover_image_url?: string | null
           created_at?: string
           description?: string | null
           end_date?: string | null
+          gallery?: Json | null
           id?: string
+          is_published?: boolean
           location?: string | null
+          model_3d_embeds?: Json | null
           model_3d_url?: string | null
           name?: string
           progress?: number | null
+          slug?: string | null
+          sort_order?: number
           start_date?: string | null
+          stats?: Json | null
           status?: string | null
+          title_en?: string | null
           updated_at?: string
+          year?: number | null
         }
         Relationships: []
+      }
+      quotation_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      quotation_items: {
+        Row: {
+          category_id: string
+          created_at: string
+          default_unit_price: number
+          description: string
+          id: string
+          is_active: boolean
+          item_code: string | null
+          sort_order: number
+          unit: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          default_unit_price?: number
+          description: string
+          id?: string
+          is_active?: boolean
+          item_code?: string | null
+          sort_order?: number
+          unit?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          default_unit_price?: number
+          description?: string
+          id?: string
+          is_active?: boolean
+          item_code?: string | null
+          sort_order?: number
+          unit?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quotation_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "quotation_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quotation_line_items: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          item_id: string | null
+          notes: string | null
+          quantity: number
+          quotation_id: string
+          sort_order: number
+          total: number
+          unit: string
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          item_id?: string | null
+          notes?: string | null
+          quantity?: number
+          quotation_id: string
+          sort_order?: number
+          total?: number
+          unit?: string
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          item_id?: string | null
+          notes?: string | null
+          quantity?: number
+          quotation_id?: string
+          sort_order?: number
+          total?: number
+          unit?: string
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quotation_line_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "quotation_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quotation_line_items_quotation_id_fkey"
+            columns: ["quotation_id"]
+            isOneToOne: false
+            referencedRelation: "quotations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quotation_notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          notification_type: string
+          quotation_id: string
+          recipient_phone: string | null
+          recipient_type: string
+          status: string | null
+          wa_message_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          notification_type: string
+          quotation_id: string
+          recipient_phone?: string | null
+          recipient_type: string
+          status?: string | null
+          wa_message_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          notification_type?: string
+          quotation_id?: string
+          recipient_phone?: string | null
+          recipient_type?: string
+          status?: string | null
+          wa_message_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quotation_notifications_quotation_id_fkey"
+            columns: ["quotation_id"]
+            isOneToOne: false
+            referencedRelation: "quotations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quotations: {
+        Row: {
+          approval_notes: string | null
+          approved_at: string | null
+          approved_by: string | null
+          client_email: string | null
+          client_name: string
+          client_phone: string | null
+          created_at: string
+          created_by: string | null
+          discount_amount: number | null
+          discount_percentage: number | null
+          finishing_level_id: string | null
+          id: string
+          labor_percentage: number | null
+          material_cost: number | null
+          modified_at: string | null
+          modified_by: string | null
+          notes: string | null
+          pdf_url: string | null
+          pricing_system: string
+          project_type: string
+          property_area: number | null
+          property_type: string | null
+          quotation_number: string
+          rejection_reason: string | null
+          status: string
+          subtotal: number
+          tax_amount: number | null
+          tax_percentage: number | null
+          total: number
+          updated_at: string
+          valid_until: string | null
+        }
+        Insert: {
+          approval_notes?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          client_email?: string | null
+          client_name: string
+          client_phone?: string | null
+          created_at?: string
+          created_by?: string | null
+          discount_amount?: number | null
+          discount_percentage?: number | null
+          finishing_level_id?: string | null
+          id?: string
+          labor_percentage?: number | null
+          material_cost?: number | null
+          modified_at?: string | null
+          modified_by?: string | null
+          notes?: string | null
+          pdf_url?: string | null
+          pricing_system?: string
+          project_type?: string
+          property_area?: number | null
+          property_type?: string | null
+          quotation_number: string
+          rejection_reason?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number | null
+          tax_percentage?: number | null
+          total?: number
+          updated_at?: string
+          valid_until?: string | null
+        }
+        Update: {
+          approval_notes?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          client_email?: string | null
+          client_name?: string
+          client_phone?: string | null
+          created_at?: string
+          created_by?: string | null
+          discount_amount?: number | null
+          discount_percentage?: number | null
+          finishing_level_id?: string | null
+          id?: string
+          labor_percentage?: number | null
+          material_cost?: number | null
+          modified_at?: string | null
+          modified_by?: string | null
+          notes?: string | null
+          pdf_url?: string | null
+          pricing_system?: string
+          project_type?: string
+          property_area?: number | null
+          property_type?: string | null
+          quotation_number?: string
+          rejection_reason?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number | null
+          tax_percentage?: number | null
+          total?: number
+          updated_at?: string
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quotations_finishing_level_id_fkey"
+            columns: ["finishing_level_id"]
+            isOneToOne: false
+            referencedRelation: "finishing_levels"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       request_server: {
         Row: {
@@ -343,6 +1095,108 @@ export type Database = {
           inserted_at?: string
           name?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      service_pages: {
+        Row: {
+          content_ar: string | null
+          content_en: string | null
+          created_at: string
+          features: Json | null
+          gallery: Json | null
+          hero_image_url: string | null
+          id: string
+          is_published: boolean
+          slug: string
+          sort_order: number
+          subtitle_ar: string | null
+          subtitle_en: string | null
+          title_ar: string
+          title_en: string | null
+          updated_at: string
+        }
+        Insert: {
+          content_ar?: string | null
+          content_en?: string | null
+          created_at?: string
+          features?: Json | null
+          gallery?: Json | null
+          hero_image_url?: string | null
+          id?: string
+          is_published?: boolean
+          slug: string
+          sort_order?: number
+          subtitle_ar?: string | null
+          subtitle_en?: string | null
+          title_ar: string
+          title_en?: string | null
+          updated_at?: string
+        }
+        Update: {
+          content_ar?: string | null
+          content_en?: string | null
+          created_at?: string
+          features?: Json | null
+          gallery?: Json | null
+          hero_image_url?: string | null
+          id?: string
+          is_published?: boolean
+          slug?: string
+          sort_order?: number
+          subtitle_ar?: string | null
+          subtitle_en?: string | null
+          title_ar?: string
+          title_en?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      tax_invoices: {
+        Row: {
+          commercial_register: string | null
+          created_at: string
+          description: string | null
+          id: string
+          invoice_date: string | null
+          invoice_number: string | null
+          item: string | null
+          source_section: string | null
+          tax_amount: number | null
+          tax_card: string | null
+          tax_type: string | null
+          taxable_amount: number | null
+          taxpayer: string | null
+        }
+        Insert: {
+          commercial_register?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          invoice_date?: string | null
+          invoice_number?: string | null
+          item?: string | null
+          source_section?: string | null
+          tax_amount?: number | null
+          tax_card?: string | null
+          tax_type?: string | null
+          taxable_amount?: number | null
+          taxpayer?: string | null
+        }
+        Update: {
+          commercial_register?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          invoice_date?: string | null
+          invoice_number?: string | null
+          item?: string | null
+          source_section?: string | null
+          tax_amount?: number | null
+          tax_card?: string | null
+          tax_type?: string | null
+          taxable_amount?: number | null
+          taxpayer?: string | null
         }
         Relationships: []
       }
@@ -409,24 +1263,18 @@ export type Database = {
           email: string
           id: string
           is_active: boolean | null
-          password_hash: string
-          role: string
         }
         Insert: {
           created_at?: string | null
           email: string
           id?: string
           is_active?: boolean | null
-          password_hash: string
-          role?: string
         }
         Update: {
           created_at?: string | null
           email?: string
           id?: string
           is_active?: boolean | null
-          password_hash?: string
-          role?: string
         }
         Relationships: []
       }
@@ -484,6 +1332,87 @@ export type Database = {
           raw_body?: string | null
           signature?: string | null
           source?: string
+        }
+        Relationships: []
+      }
+      webhook_logs: {
+        Row: {
+          conversation_id: string | null
+          error_message: string | null
+          id: number
+          payload: Json | null
+          processed_at: string | null
+          processing_time_ms: number | null
+          received_at: string | null
+          response_status: number | null
+          webhook_type: string | null
+        }
+        Insert: {
+          conversation_id?: string | null
+          error_message?: string | null
+          id?: number
+          payload?: Json | null
+          processed_at?: string | null
+          processing_time_ms?: number | null
+          received_at?: string | null
+          response_status?: number | null
+          webhook_type?: string | null
+        }
+        Update: {
+          conversation_id?: string | null
+          error_message?: string | null
+          id?: number
+          payload?: Json | null
+          processed_at?: string | null
+          processing_time_ms?: number | null
+          received_at?: string | null
+          response_status?: number | null
+          webhook_type?: string | null
+        }
+        Relationships: []
+      }
+      whatsapp_conversations: {
+        Row: {
+          conversation_id: string
+          created_at: string | null
+          ended_at: string | null
+          id: number
+          last_message_at: string | null
+          message_count: number | null
+          platform_metadata: Json | null
+          started_at: string | null
+          status: string | null
+          updated_at: string | null
+          user_phone: string
+          whatsapp_conversation_id: string | null
+        }
+        Insert: {
+          conversation_id: string
+          created_at?: string | null
+          ended_at?: string | null
+          id?: number
+          last_message_at?: string | null
+          message_count?: number | null
+          platform_metadata?: Json | null
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_phone: string
+          whatsapp_conversation_id?: string | null
+        }
+        Update: {
+          conversation_id?: string
+          created_at?: string | null
+          ended_at?: string | null
+          id?: number
+          last_message_at?: string | null
+          message_count?: number | null
+          platform_metadata?: Json | null
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_phone?: string
+          whatsapp_conversation_id?: string | null
         }
         Relationships: []
       }
@@ -630,6 +1559,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_quotation_number: { Args: never; Returns: string }
+      get_conversation_stats: {
+        Args: { end_date: string; start_date: string }
+        Returns: {
+          avg_duration: number
+          needs_followup_count: number
+          negative_sentiment_count: number
+          positive_sentiment_count: number
+          total_conversations: number
+        }[]
+      }
       is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
