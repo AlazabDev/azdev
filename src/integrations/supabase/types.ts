@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_notifications: {
+        Row: {
+          created_at: string
+          id: string
+          link: string | null
+          message: string | null
+          metadata: Json
+          read_at: string | null
+          severity: Database["public"]["Enums"]["notification_severity"]
+          source: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          link?: string | null
+          message?: string | null
+          metadata?: Json
+          read_at?: string | null
+          severity?: Database["public"]["Enums"]["notification_severity"]
+          source?: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          link?: string | null
+          message?: string | null
+          metadata?: Json
+          read_at?: string | null
+          severity?: Database["public"]["Enums"]["notification_severity"]
+          source?: string
+          title?: string
+        }
+        Relationships: []
+      }
       app_secrets: {
         Row: {
           created_at: string | null
@@ -661,6 +697,104 @@ export type Database = {
         }
         Relationships: []
       }
+      project_comments: {
+        Row: {
+          author_email: string
+          author_name: string
+          comment_text: string
+          created_at: string | null
+          id: string
+          image_id: string | null
+          is_approved: boolean | null
+          project_id: string
+          rating: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          author_email: string
+          author_name: string
+          comment_text: string
+          created_at?: string | null
+          id?: string
+          image_id?: string | null
+          is_approved?: boolean | null
+          project_id: string
+          rating?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          author_email?: string
+          author_name?: string
+          comment_text?: string
+          created_at?: string | null
+          id?: string
+          image_id?: string | null
+          is_approved?: boolean | null
+          project_id?: string
+          rating?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_comments_image_id_fkey"
+            columns: ["image_id"]
+            isOneToOne: false
+            referencedRelation: "project_images"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_comments_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_images: {
+        Row: {
+          alt_text: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          image_url: string
+          order_index: number | null
+          project_id: string
+          thumbnail_url: string | null
+          title: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url: string
+          order_index?: number | null
+          project_id: string
+          thumbnail_url?: string | null
+          title?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string
+          order_index?: number | null
+          project_id?: string
+          thumbnail_url?: string | null
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_images_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_reviews: {
         Row: {
           comment: string
@@ -723,12 +857,15 @@ export type Database = {
           end_date: string | null
           gallery: Json | null
           id: string
+          is_featured: boolean | null
           is_published: boolean
           location: string | null
           model_3d_embeds: Json | null
           model_3d_url: string | null
           name: string
+          order_index: number | null
           progress: number | null
+          short_description: string | null
           slug: string | null
           sort_order: number
           start_date: string | null
@@ -752,12 +889,15 @@ export type Database = {
           end_date?: string | null
           gallery?: Json | null
           id?: string
+          is_featured?: boolean | null
           is_published?: boolean
           location?: string | null
           model_3d_embeds?: Json | null
           model_3d_url?: string | null
           name: string
+          order_index?: number | null
           progress?: number | null
+          short_description?: string | null
           slug?: string | null
           sort_order?: number
           start_date?: string | null
@@ -781,12 +921,15 @@ export type Database = {
           end_date?: string | null
           gallery?: Json | null
           id?: string
+          is_featured?: boolean | null
           is_published?: boolean
           location?: string | null
           model_3d_embeds?: Json | null
           model_3d_url?: string | null
           name?: string
+          order_index?: number | null
           progress?: number | null
+          short_description?: string | null
           slug?: string | null
           sort_order?: number
           start_date?: string | null
@@ -1574,6 +1717,7 @@ export type Database = {
     }
     Enums: {
       mr_status: "Open" | "InProgress" | "Completed" | "Cancelled"
+      notification_severity: "info" | "success" | "warning" | "error"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1702,6 +1846,7 @@ export const Constants = {
   public: {
     Enums: {
       mr_status: ["Open", "InProgress", "Completed", "Cancelled"],
+      notification_severity: ["info", "success", "warning", "error"],
     },
   },
 } as const
