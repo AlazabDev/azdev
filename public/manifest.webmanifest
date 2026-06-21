@@ -1,7 +1,7 @@
 {
-  "name": "alazab.dev - Advanced Tech Solutions",
+  "name": "alazab.dev - حلول تقنية متقدمة",
   "short_name": "alazab.dev",
-  "description": "IT team providing innovative technical solutions for construction and architectural projects",
+  "description": "فريق تقني يقدم حلولاً مبتكرة في تطوير التطبيقات، الذكاء الاصطناعي، والأمن السيبراني للمشاريع المعمارية والإنشائية.",
   "theme_color": "#7c3aed",
   "background_color": "#0a0a0f",
   "display": "standalone",
@@ -10,7 +10,7 @@
   "start_url": "/",
   "id": "/",
   "categories": ["business", "technology", "productivity"],
-  "lang": "en",
+  "lang": "ar",
   "dir": "ltr",
   "icons": [
     {
@@ -28,7 +28,20 @@
     {
       "src": "/favicon002.png",
       "sizes": "64x64",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon002.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon002.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "screenshots": [
@@ -37,7 +50,17 @@
       "sizes": "1200x630",
       "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "alazab.dev Homepage"
+      "label": "alazab.dev - الصفحة الرئيسية"
+    },
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "alazab.dev - الصفحة الرئيسية"
     }
-  ]
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "display_override": ["window-controls-overlay", "standalone"]
 }
