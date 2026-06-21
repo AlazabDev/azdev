@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -80,17 +80,19 @@ const ProfileMohamedAzab = () => {
     });
   }, [language]);
 
+  useEffect(() => {
+    // canonical
+    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      document.head.appendChild(link);
+    }
+    link.href = 'https://alazab.dev/profile/mohamed-azab';
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <link rel="canonical" href="https://alazab.dev/profile/mohamed-azab" />
-        <meta property="og:title" content="Mohamed Azab — Founder of alazab.dev" />
-        <meta property="og:description" content={data.bio} />
-        <meta property="og:type" content="profile" />
-        <meta property="og:url" content="https://alazab.dev/profile/mohamed-azab" />
-        <meta property="og:image" content="https://alazab.dev/team001.png" />
-      </Helmet>
-
       <Header />
 
       <main className="pt-24 pb-16">

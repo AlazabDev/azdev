@@ -18,6 +18,7 @@ import CookiesPolicy from "./pages/CookiesPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
+import ProfileMohamedAzab from "./pages/ProfileMohamedAzab";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
               <Route path="/auth/v1/callback" element={<AuthCallback />} />
+              <Route path="/profile/mohamed-azab" element={<ProfileMohamedAzab />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
