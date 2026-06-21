@@ -1,13 +1,11 @@
+# Allow all crawlers
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://alazab.dev/sitemap.xml
-
-# Crawl-delay
+# Crawl-delay for less aggressive crawlers
 Crawl-delay: 1
 
-# Popular bots
+# Specific bot configurations
 User-agent: Googlebot
 Allow: /
 
@@ -20,12 +18,19 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# Disallow sensitive or unnecessary paths
+# Disallow sensitive paths
 Disallow: /api/
-Disallow: *.json$
-Disallow: *.xml$
 Disallow: /admin/
 Disallow: /private/
+Disallow: /tmp/
+Disallow: /logs/
 
-# Host (specify the main domain)
-Host: https://alazab.dev
+# Disallow file types (optional)
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Allow sitemap (explicitly allowed)
+Allow: /sitemap.xml
+
+# Sitemap location
+Sitemap: https://alazab.dev/sitemap.xml
